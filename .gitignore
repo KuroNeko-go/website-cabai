@@ -1,0 +1,4 @@
+/vendor/
+/user_guide/
+*.log
+.htaccess
