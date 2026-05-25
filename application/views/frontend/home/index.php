@@ -27,7 +27,11 @@
         <?php foreach ($featured_cabais as $cabai): ?>
         <a href="<?= base_url('/cabai/detail/' . $cabai['id']) ?>" class="product-card">
             <div class="product-image">
-                <i class="fas fa-pepper-hot"></i>
+                <?php if (!empty($cabai['gambar']) && file_exists('./' . $cabai['gambar'])): ?>
+                    <img src="<?= base_url($cabai['gambar']) ?>" alt="<?= $cabai['nama_varietas'] ?>" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;" />
+                <?php else: ?>
+                    <i class="fas fa-pepper-hot"></i>
+                <?php endif; ?>
             </div>
             <div class="product-info">
                 <div class="product-title"><?= $cabai['nama_varietas'] ?></div>
@@ -48,7 +52,11 @@
         <?php foreach ($popular_bibits as $bibit): ?>
         <a href="<?= base_url('/bibit/detail/' . $bibit['id']) ?>" class="product-card">
             <div class="product-image">
-                <i class="fas fa-seedling"></i>
+                <?php if (!empty($bibit['gambar']) && file_exists('./' . $bibit['gambar'])): ?>
+                    <img src="<?= base_url($bibit['gambar']) ?>" alt="<?= $bibit['nama_produk'] ?>" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;" />
+                <?php else: ?>
+                    <i class="fas fa-seedling"></i>
+                <?php endif; ?>
             </div>
             <div class="product-info">
                 <div class="product-title"><?= $bibit['nama_produk'] ?></div>

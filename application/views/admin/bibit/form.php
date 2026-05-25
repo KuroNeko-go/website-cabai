@@ -4,6 +4,17 @@
         <?= isset($bibit) ? 'Edit Bibit Cabai' : 'Tambah Bibit Cabai' ?>
     </div>
     <div class="card-body">
+        <?php if ($this->session->flashdata('error')): ?>
+            <div style="margin-bottom: 20px; padding: 15px; border-radius: 12px; background: #f8d7da; color: #842029; border: 1px solid #f5c2c7;">
+                <?= $this->session->flashdata('error') ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('success')): ?>
+            <div style="margin-bottom: 20px; padding: 15px; border-radius: 12px; background: #d1e7dd; color: #0f5132; border: 1px solid #badbcc;">
+                <?= $this->session->flashdata('success') ?>
+            </div>
+        <?php endif; ?>
+        <?= validation_errors('<div style="margin-bottom: 20px; padding: 15px; border-radius: 12px; background: #f8d7da; color: #842029; border: 1px solid #f5c2c7;">', '</div>') ?>
         <form action="<?= base_url(isset($bibit) ? 'admin_bibit/update/' . $bibit['id'] : 'admin_bibit/store') ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">

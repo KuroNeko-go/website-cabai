@@ -43,10 +43,17 @@
         <div class="card-body">
             <?php if (!empty($low_stock)): ?>
                 <table class="table">
-                    <thead><tr><th>Produk</th><th>Stok</th><th>Aksi</th></tr></thead>
+                    <thead><tr><th>Gambar</th><th>Produk</th><th>Stok</th><th>Aksi</th></tr></thead>
                     <tbody>
                         <?php foreach ($low_stock as $item): ?>
                         <tr>
+                            <td style="width: 90px;">
+                                <?php if (!empty($item['gambar']) && file_exists('./' . $item['gambar'])): ?>
+                                    <img src="<?= base_url($item['gambar']) ?>" alt="<?= $item['nama_produk'] ?>" style="width: 70px; height: 50px; object-fit: cover; border-radius: 8px;" />
+                                <?php else: ?>
+                                    <span style="display: inline-block; width: 70px; height: 50px; background: #f0f0f0; border-radius: 8px; text-align: center; line-height: 50px; color: #999;">-</span>
+                                <?php endif; ?>
+                            </td>
                             <td><?= $item['nama_produk'] ?></td>
                             <td><span class="badge badge-danger"><?= $item['stok'] ?></span></td>
                             <td><a href="<?= base_url('admin_bibit/edit/' . $item['id']) ?>" class="btn btn-sm btn-primary">Edit</a></td>

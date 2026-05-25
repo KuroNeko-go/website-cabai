@@ -58,21 +58,34 @@ class Admin_cabai extends CI_Controller {
             ];
             
             // Upload gambar
-            if (!empty($_FILES['gambar']['name'])) {
-                $config['upload_path'] = './uploads/cabai/';
-                $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
-                $config['max_size'] = 2048;
-                $config['encrypt_name'] = true;
-                
-                if (!is_dir('./uploads/cabai/')) {
-                    mkdir('./uploads/cabai/', 0777, true);
-                }
-                
-                $this->load->library('upload', $config);
-                
-                if ($this->upload->do_upload('gambar')) {
-                    $upload_data = $this->upload->data();
-                    $data['gambar'] = 'uploads/cabai/' . $upload_data['file_name'];
+            if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] !== UPLOAD_ERR_NO_FILE) {
+                if (!empty($_FILES['gambar']['name'])) {
+                    $upload_dir = FCPATH . 'uploads/cabai/';
+                    $config['upload_path'] = $upload_dir;
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+                    $config['max_size'] = 2048;
+                    $config['encrypt_name'] = true;
+                    
+                    if (!is_dir($upload_dir)) {
+                        mkdir($upload_dir, 0777, true);
+                    }
+                    
+                    if (isset($this->upload)) {
+                        $this->upload->initialize($config);
+                    } else {
+                        $this->load->library('upload', $config);
+                    }
+                    
+                    if ($this->upload->do_upload('gambar')) {
+                        $upload_data = $this->upload->data();
+                        $data['gambar'] = 'uploads/cabai/' . $upload_data['file_name'];
+                    } else {
+                        $this->session->set_flashdata('error', $this->upload->display_errors('', ''));
+                        redirect('admin_cabai/create');
+                    }
+                } else {
+                    $this->session->set_flashdata('error', 'Gagal mengunggah gambar. Periksa ukuran file dan pengaturan PHP upload.');
+                    redirect('admin_cabai/create');
                 }
             }
             
@@ -119,22 +132,39 @@ class Admin_cabai extends CI_Controller {
                 'updated_at' => date('Y-m-d H:i:s')
             ];
             
-            if (!empty($_FILES['gambar']['name'])) {
-                $config['upload_path'] = './uploads/cabai/';
-                $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
-                $config['max_size'] = 2048;
-                $config['encrypt_name'] = true;
-                
-                $this->load->library('upload', $config);
-                
-                if ($this->upload->do_upload('gambar')) {
-                    $old = $this->Cabai_model->get_by_id($id);
-                    if ($old['gambar'] && file_exists('./' . $old['gambar'])) {
-                        unlink('./' . $old['gambar']);
+            if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] !== UPLOAD_ERR_NO_FILE) {
+                if (!empty($_FILES['gambar']['name'])) {
+                    $upload_dir = FCPATH . 'uploads/cabai/';
+                    $config['upload_path'] = $upload_dir;
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+                    $config['max_size'] = 2048;
+                    $config['encrypt_name'] = true;
+                    
+                    if (!is_dir($upload_dir)) {
+                        mkdir($upload_dir, 0777, true);
                     }
                     
-                    $upload_data = $this->upload->data();
-                    $data['gambar'] = 'uploads/cabai/' . $upload_data['file_name'];
+                    if (isset($this->upload)) {
+                        $this->upload->initialize($config);
+                    } else {
+                        $this->load->library('upload', $config);
+                    }
+                    
+                    if ($this->upload->do_upload('gambar')) {
+                        $old = $this->Cabai_model->get_by_id($id);
+                        if ($old['gambar'] && file_exists('./' . $old['gambar'])) {
+                            unlink('./' . $old['gambar']);
+                        }
+                        
+                        $upload_data = $this->upload->data();
+                        $data['gambar'] = 'uploads/cabai/' . $upload_data['file_name'];
+                    } else {
+                        $this->session->set_flashdata('error', $this->upload->display_errors('', ''));
+                        redirect('admin_cabai/edit/' . $id);
+                    }
+                } else {
+                    $this->session->set_flashdata('error', 'Gagal mengunggah gambar. Periksa ukuran file dan pengaturan PHP upload.');
+                    redirect('admin_cabai/edit/' . $id);
                 }
             }
             
