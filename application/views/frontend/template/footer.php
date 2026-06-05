@@ -12,22 +12,13 @@
 
             <!-- Kolom 2 -->
             <div class="footer-col">
-                <h4>Navigasi Halaman</h4>
-                <a href="<?= base_url() ?>"><i class="fas fa-chevron-right" style="font-size:0.7rem; margin-right:5px;"></i> Beranda</a>
-                <a href="<?= base_url('bibit') ?>"><i class="fas fa-chevron-right" style="font-size:0.7rem; margin-right:5px;"></i> Produk Bibit</a>
-                <a href="<?= base_url('cabai') ?>"><i class="fas fa-chevron-right" style="font-size:0.7rem; margin-right:5px;"></i> Produk Cabai</a>
-                <a href="<?= base_url('cart') ?>"><i class="fas fa-chevron-right" style="font-size:0.7rem; margin-right:5px;"></i> Keranjang Belanja</a>
-            </div>
-
-            <!-- Kolom 3 -->
-            <div class="footer-col">
                 <h4>Kontak & Alamat</h4>
                 <p><i class="fas fa-map-marker-alt" style="width:20px;"></i> Grabag, Secang, Magelang, Central Java</p>
                 <p><i class="fas fa-phone-alt" style="width:20px;"></i> +62 812-3456-7890</p>
                 <p><i class="fas fa-envelope" style="width:20px;"></i> info@duaputra.com</p>
             </div>
 
-            <!-- Kolom 4 -->
+            <!-- Kolom 3 -->
             <div class="footer-col">
                 <h4>Ikuti Kami</h4>
                 <p>Dapatkan info seputar tips pertanian dan promo bibit unggul terbaru melalui sosial media kami.</p>
