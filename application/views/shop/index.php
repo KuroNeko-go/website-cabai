@@ -1,75 +1,89 @@
-<section class="hero" style="min-height: 40vh; padding: 120px 0 60px;">
+<!-- BANNER ATAS HORTIKULTURA BIBIT -->
+<section style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 5rem 0 3rem 0; text-align: center;">
     <div class="container">
-        <div class="hero-content" style="grid-template-columns: 1fr;">
-            <div class="hero-text" style="text-align: center;">
-                <h1>🛒 Toko Bibit Cabai Nusantara</h1>
-                <p>Dapatkan bibit unggul berkualitas dengan harga terbaik</p>
-            </div>
-        </div>
+        <h1 style="font-weight: 800; color: #2d6a4f; font-size: 2.5rem; margin-bottom: 0.5rem;">
+            🌱 Benih & Bibit Tanaman Unggul
+        </h1>
+        <p style="color: #4a5b4e; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+            Sedia berbagai macam bibit tanaman hortikultura berkualitas tinggi, adaptif, dan siap tanam untuk hasil panen maksimal.
+        </p>
     </div>
 </section>
 
-<div class="container">
-    <div class="products-grid">
-        <?php foreach ($bibits as $bibit): ?>
-        <div class="product-card">
-            <a href="<?= base_url('/bibit/detail/' . $bibit['id']) ?>" style="text-decoration: none; color: inherit;">
-                <div class="product-image">
-                    <?php if ($bibit['gambar'] && file_exists('./' . $bibit['gambar'])): ?>
-                        <img src="<?= base_url($bibit['gambar']) ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                    <?php else: ?>
-                        <i class="fas fa-seedling"></i>
-                    <?php endif; ?>
-                    <?php if ($bibit['is_new']): ?>
-                        <span style="position: absolute; top: 10px; left: 10px; background: #dc3545; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">NEW</span>
-                    <?php endif; ?>
-                    <?php if ($bibit['is_popular']): ?>
-                        <span style="position: absolute; top: 10px; right: 10px; background: #ff9800; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">🔥 POPULER</span>
-                    <?php endif; ?>
-                </div>
-                <div class="product-info">
-                    <div class="product-title"><?= $bibit['nama_produk'] ?></div>
-                    <div class="product-price">
-                        Rp <?= number_format($bibit['harga_diskon'] ?: $bibit['harga'], 0, ',', '.') ?>
-                        <?php if ($bibit['harga_diskon']): ?>
-                            <small>Rp <?= number_format($bibit['harga'], 0, ',', '.') ?></small>
-                        <?php endif; ?>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                        <small>📦 Stok: <?= $bibit['stok'] ?></small>
-                        <small>🌶️ <?= $bibit['nama_varietas'] ?></small>
-                    </div>
-                </div>
-            </a>
-            <button class="add-to-cart" data-id="<?= $bibit['id'] ?>" data-name="<?= $bibit['nama_produk'] ?>" data-price="<?= $bibit['harga_diskon'] ?: $bibit['harga'] ?>" style="width: calc(100% - 40px); margin: 0 20px 20px; padding: 12px; background: #2d7a24; color: white; border: none; border-radius: 40px; font-weight: 600; cursor: pointer;">
-                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-            </button>
-        </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-<script>
-document.querySelectorAll('.add-to-cart').forEach(button => {
-    button.addEventListener('click', function() {
-        let id = this.dataset.id;
-        let name = this.dataset.name;
-        let price = parseInt(this.dataset.price);
+<!-- GRID PRODUK BIBIT -->
+<section style="padding: 5rem 0; background: #ffffff;">
+    <div class="container">
         
-        fetch('<?= base_url("cart/add") ?>', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'id=' + id + '&qty=1'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert('✅ ' + name + ' ditambahkan ke keranjang!');
-                updateCartCount();
-            } else {
-                alert('❌ ' + data.message);
-            }
-        });
-    });
-});
-</script>
+        <?php if (!empty($bibits)): ?>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+                <?php foreach ($bibits as $b): ?>
+                    <?php 
+                        // Deteksi nama kolom SQL data produk bibit lu
+                        $nama_produk = '';
+                        if (isset($b['nama_bibit'])) {
+                            $nama_produk = $b['nama_bibit'];
+                        } elseif (isset($b['nama_varietas'])) {
+                            $nama_produk = $b['nama_varietas'];
+                        } elseif (isset($b['nama'])) {
+                            $nama_produk = $b['nama'];
+                        } else {
+                            $nama_produk = 'Bibit Unggul Duaputra';
+                        }
+                    ?>
+                    <div style="background: #ffffff; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e9ecef; overflow: hidden; transition: transform 0.3s ease; display: flex; flex-direction: column;">
+                        
+                        <!-- Gambar Produk Bibit -->
+                        <div style="height: 200px; background: #f8f9fa; position: relative; overflow: hidden;">
+                            <?php if (!empty($b['gambar'])): ?>
+                                <img src="<?= base_url($b['gambar']) ?>" alt="<?= $nama_produk ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php else: ?>
+                                <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #6c757d; font-size: 3rem;">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <!-- Konten Info Produk -->
+                        <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <span style="font-size: 0.75rem; color: #ff9f1c; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">
+                                Varietas Unggul
+                            </span>
+                            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a2c1e; margin: 0;">
+                                <?= $nama_produk ?>
+                            </h3>
+                            <p style="color: #6c757d; font-size: 0.85rem; line-height: 1.5; margin: 0 0 1rem 0;">
+                                <?= !empty($b['deskripsi']) ? (strlen($b['deskripsi']) > 90 ? substr($b['deskripsi'], 0, 90) . '...' : $b['deskripsi']) : 'Bibit tanaman pilihan dengan persentase tumbuh tinggi, perakaran kuat, dan bebas penyakit.' ?>
+                            </p>
+                            
+                            <!-- Bagian Bawah Card (Harga & Tombol) -->
+                            <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid #e9ecef;">
+                                <div>
+                                    <span style="display: block; font-size: 0.75rem; color: #6c757d;">Harga Bibit</span>
+                                    <span style="font-size: 1.15rem; font-weight: 800; color: #2d6a4f;">
+                                        Rp <?= isset($b['harga']) ? number_format($b['harga'], 0, ',', '.') : '0' ?>
+                                    </span>
+                                </div>
+                                <a href="<?= base_url('bibit/detail/' . $b['id']) ?>" class="btn btn-primary" style="padding: 0.5rem 1.25rem !important; border-radius: 10px !important; font-size: 0.8rem !important; background-color: #2d6a4f !important; color: white !important; text-decoration: none;">
+                                    <i class="fas fa-eye"></i> Detail
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+        <?php else: ?>
+            <div style="text-align: center; padding: 5rem 0;">
+                <div style="font-size: 4rem; color: #6c757d; margin-bottom: 1.5rem;">
+                    <i class="fas fa-seedling" style="opacity: 0.3;"></i>
+                </div>
+                <h3 style="font-weight: 700; color: #4a5b4e;">Stok Bibit Belum Tersedia</h3>
+                <p style="color: #6c757d; max-width: 500px; margin: 0 auto 1.5rem;">
+                    Sistem terhubung, namun array data bibit kosong dari database.
+                </p>
+            </div>
+        <?php endif; ?>
+
+    </div>
+</section>

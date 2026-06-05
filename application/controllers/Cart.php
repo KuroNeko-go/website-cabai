@@ -9,6 +9,7 @@ class Cart extends CI_Controller {
         $this->load->model('Bibit_model');
         $this->load->model('Transaksi_model');
         $this->load->library('form_validation');
+        $this->load->library('cart');
         
         // Inisialisasi cart di session jika belum ada
         if (!$this->session->userdata('cart')) {
