@@ -44,7 +44,11 @@
 
     <!-- NAVBAR UTAMA -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container" style="display: flex; align-items: center; gap: 1rem;">
+            <button type="button" onclick="goBack()" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.9); border: 1px solid rgba(45,106,79,0.2); border-radius: 999px; padding: 0.65rem 1rem; color: #2d6a4f; font-weight: 600; cursor: pointer; box-shadow: 0 6px 18px rgba(45,106,79,0.08); transition: transform 0.2s ease;">
+                <i class="fas fa-arrow-left"></i>
+                Kembali
+            </button>
             <!-- Brand Logo Duaputra -->
             <a href="<?= base_url() ?>" class="logo">
                 <div class="logo-icon">
@@ -84,6 +88,14 @@
         function tutupMenuDuaputra() {
             document.getElementById('sidebarDrawer').classList.remove('open');
             document.getElementById('drawerOverlay').classList.remove('show');
+        }
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '<?= base_url() ?>';
+            }
         }
 
         window.addEventListener('scroll', () => {
