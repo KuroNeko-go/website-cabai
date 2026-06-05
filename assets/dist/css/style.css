@@ -1,0 +1,590 @@
+/* ========================================================
+   DUAPUTRA - BIBIT UNGGUL, PANEN MAKSIMAL
+   Pusat Desain Eksternal (Clean & Organized)
+   ======================================================== */
+
+:root {
+    --primary: #2d6a4f;
+    --primary-dark: #1b4d3e;
+    --primary-light: #40916c;
+    --secondary: #ff9f1c;
+    --secondary-dark: #e68a00;
+    --dark: #1a2c1e;
+    --gray-dark: #4a5b4e;
+    --gray: #6c757d;
+    --gray-light: #e9ecef;
+    --light: #f8f9fa;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Reset untuk Halaman Depan */
+body.layout-top-nav {
+    font-family: 'Inter', 'Poppins', sans-serif !important;
+    background: var(--white);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ========================================================
+   NAVBAR & BURGER SYSTEM (Spesifik Mengunci Elemen)
+   ======================================================== */
+body .navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white) !important;
+    box-shadow: var(--shadow-sm) !important;
+    z-index: 1000 !important;
+    padding: 1rem 0;
+    display: block !important;
+}
+
+/* Sembunyikan Navigasi Bawaan AdminLTE */
+body .navbar .navbar-nav,
+body .navbar .nav-menu {
+    display: none !important;
+}
+
+/* Tombol Burger Kustom */
+body .btn-burger-kustom {
+    display: block !important;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--primary);
+    padding: 0.5rem;
+    transition: transform 0.2s, color 0.2s;
+    z-index: 1001;
+}
+
+body .btn-burger-kustom:hover {
+    color: var(--primary-dark);
+    transform: scale(1.1);
+}
+
+/* Ikon Brand Logo */
+body .logo {
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+body .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: white;
+    font-size: 1.2rem;
+}
+
+body .logo-text {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 1.25rem;
+}
+
+body .logo-tagline {
+    font-size: 0.65rem;
+    color: var(--gray);
+    display: block;
+}
+
+/* Keranjang Belanja di Navbar */
+body .cart-icon {
+    text-decoration: none !important;
+    position: relative;
+    display: inline-block;
+}
+
+body .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: var(--secondary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 20px;
+}
+
+/* ========================================================
+   SIDEBAR DRAWER (Laci Menu Samping)
+   ======================================================== */
+body .sidebar-drawer {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    transform: translateX(320px);
+    /* Tersembunyi rapi di kanan */
+    width: 300px !important;
+    height: 100vh !important;
+    background: var(--white) !important;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1) !important;
+    z-index: 99999 !important;
+    transition: transform 0.3s ease-in-out !important;
+    padding: 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+}
+
+body .sidebar-drawer.open {
+    transform: translateX(0) !important;
+    /* Meluncur masuk */
+}
+
+body .drawer-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 99998 !important;
+    display: none;
+}
+
+body .drawer-overlay.show {
+    display: block !important;
+}
+
+body .close-drawer {
+    align-self: flex-end !important;
+    background: none !important;
+    border: none !important;
+    font-size: 1.5rem !important;
+    cursor: pointer !important;
+    color: var(--gray) !important;
+}
+
+body .drawer-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+}
+
+body .drawer-menu a {
+    text-decoration: none !important;
+    color: var(--dark) !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid var(--gray-light) !important;
+}
+
+body .drawer-menu a:hover {
+    color: var(--primary) !important;
+}
+
+body .btn-login-drawer {
+    margin-top: 2rem !important;
+    background: var(--primary) !important;
+    color: var(--white) !important;
+    text-align: center !important;
+    padding: 0.75rem !important;
+    border-radius: 8px !important;
+    font-weight: bold !important;
+}
+
+/* ========================================================
+   TYPOGRAPHY & BUTTONS
+   ======================================================= */
+.duaputra-body h1,
+.duaputra-body h2,
+.duaputra-body h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.duaputra-body .title-seksi {
+    text-align: center !important;
+    margin-bottom: 4rem !important;
+}
+
+.duaputra-body .title-seksi h2 {
+    font-size: 2.5rem !important;
+    position: relative;
+    display: inline-block;
+}
+
+.duaputra-body .title-seksi h2:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--secondary);
+    border-radius: 3px;
+}
+
+.duaputra-body .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.875rem 2rem !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    font-size: 0.875rem !important;
+    cursor: pointer !important;
+    border: none !important;
+}
+
+.duaputra-body .btn-primary {
+    background: var(--primary) !important;
+    color: var(--white) !important;
+}
+
+.duaputra-body .btn-primary:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-2px);
+}
+
+.duaputra-body .btn-outline {
+    background: transparent !important;
+    border: 2px solid var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+.duaputra-body .btn-outline:hover {
+    background: var(--primary) !important;
+    color: var(--white) !important;
+}
+
+/* ========================================================
+   HERO & BERANDA SECTIONS
+   ======================================================== */
+.duaputra-body .hero-duaputra {
+    min-height: 90vh !important;
+    display: flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%) !important;
+    padding: 120px 0 60px 0 !important;
+}
+
+.duaputra-body .grid-hero {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4rem !important;
+    align-items: center !important;
+}
+
+.duaputra-body .hero-content-kustom h1 {
+    font-size: 3.5rem !important;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.duaputra-body .hero-content-kustom h1 span {
+    color: var(--primary);
+}
+
+.duaputra-body .hero-content-kustom p {
+    font-size: 1.125rem !important;
+    color: var(--gray-dark) !important;
+    margin-bottom: 2rem;
+}
+
+.duaputra-body .flex-buttons,
+.duaputra-body .hero-stats {
+    display: flex !important;
+    gap: 1.5rem !important;
+}
+
+.duaputra-body .stat-item h4 {
+    font-size: 1.75rem !important;
+    color: var(--primary) !important;
+    margin: 0;
+}
+
+.duaputra-body .hero-image-kustom {
+    animation: floatAnimation 3s ease-in-out infinite !important;
+    text-align: center !important;
+}
+
+.duaputra-body .hero-image-kustom img,
+.duaputra-body .about-image-kustom img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 30px !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+@keyframes floatAnimation {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.duaputra-body .stats-duaputra {
+    background: var(--primary-dark) !important;
+    color: var(--white) !important;
+    padding: 3rem 0 !important;
+}
+
+.duaputra-body .stats-grid-kustom {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem !important;
+    text-align: center !important;
+}
+
+.duaputra-body .stat-card-kustom .num {
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    color: var(--secondary) !important;
+}
+
+.duaputra-body .features-duaputra {
+    padding: 5rem 0 !important;
+    background: var(--light) !important;
+}
+
+.duaputra-body .features-grid-kustom {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+}
+
+.duaputra-body .feature-card-kustom {
+    background: var(--white) !important;
+    padding: 2.5rem 2rem !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: transform 0.3s !important;
+}
+
+.duaputra-body .feature-card-kustom:hover {
+    transform: translateY(-8px) !important;
+}
+
+.duaputra-body .feature-icon-kustom {
+    width: 60px;
+    height: 60px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 50%;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 1.5rem !important;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.duaputra-body .about-duaputra {
+    padding: 5rem 0 !important;
+    background: var(--white) !important;
+}
+
+.duaputra-body .about-grid-kustom {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4rem !important;
+    align-items: center !important;
+}
+
+.duaputra-body .about-content-kustom h3 {
+    color: var(--secondary) !important;
+    font-size: 1rem !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.duaputra-body .about-content-kustom h2 {
+    font-size: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.duaputra-body .about-stats-flex {
+    display: flex !important;
+    gap: 3rem !important;
+    margin: 1.5rem 0 !important;
+}
+
+.duaputra-body .about-stat-item .n {
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+}
+
+.duaputra-body .cta-duaputra {
+    padding: 5rem 0 !important;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary)) !important;
+    color: var(--white) !important;
+    text-align: center !important;
+}
+
+.duaputra-body .cta-duaputra h2 {
+    font-size: 2.5rem !important;
+    color: var(--white) !important;
+    margin-bottom: 1rem !important;
+}
+
+/* ========================================================
+   FOOTER SECTION 
+   ======================================================== */
+.footer-duaputra {
+    background: var(--dark) !important;
+    color: var(--white) !important;
+    padding: 5rem 0 2rem !important;
+    margin-top: 5rem !important;
+    display: block !important;
+}
+
+.footer-duaputra .footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2.5rem !important;
+}
+
+.footer-duaputra .footer-col h4 {
+    font-size: 1.2rem !important;
+    color: var(--white) !important;
+    font-weight: 700 !important;
+    margin-bottom: 1.5rem !important;
+    position: relative !important;
+    display: inline-block !important;
+}
+
+.footer-duaputra .footer-col h4:after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -8px !important;
+    left: 0 !important;
+    width: 40px !important;
+    height: 2px !important;
+    background: var(--secondary) !important;
+}
+
+.footer-duaputra .footer-col p {
+    opacity: 0.8 !important;
+    line-height: 1.8 !important;
+    font-size: 0.9rem !important;
+    color: var(--white) !important;
+}
+
+.footer-duaputra .footer-col a {
+    color: var(--white) !important;
+    text-decoration: none !important;
+    opacity: 0.8 !important;
+    transition: all 0.3s !important;
+    display: inline-block !important;
+    margin-bottom: 0.75rem !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+}
+
+.footer-duaputra .footer-col a:hover {
+    opacity: 1 !important;
+    color: var(--secondary) !important;
+    padding-left: 5px !important;
+}
+
+.footer-duaputra .social-links {
+    display: flex !important;
+    gap: 1rem !important;
+    margin-top: 1.25rem !important;
+}
+
+.footer-duaputra .social-links a {
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--white) !important;
+}
+
+.footer-duaputra .social-links a:hover {
+    background: var(--primary) !important;
+    transform: translateY(-3px) !important;
+}
+
+.footer-duaputra .footer-bottom {
+    text-align: center !important;
+    padding-top: 2rem !important;
+    margin-top: 3rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    opacity: 0.6 !important;
+    font-size: 0.85rem !important;
+    color: var(--white) !important;
+}
+
+/* ========================================================
+   RESPONSIVE BREAKPOINTS (HP & TAB)
+   ======================================================== */
+@media (max-width: 992px) {
+
+    .duaputra-body .grid-hero,
+    .duaputra-body .about-grid-kustom {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+    }
+
+    .duaputra-body .flex-buttons,
+    .duaputra-body .about-stats-flex {
+        justify-content: center !important;
+    }
+
+    .duaputra-body .stats-grid-kustom,
+    .duaputra-body .features-grid-kustom,
+    .footer-duaputra .footer-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .duaputra-body .hero-content-kustom h1 {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .duaputra-body .stats-grid-kustom,
+    .duaputra-body .features-grid-kustom,
+    .footer-duaputra .footer-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .footer-duaputra .footer-grid {
+        text-align: center !important;
+    }
+
+    .footer-duaputra .footer-col h4:after {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .footer-duaputra .social-links {
+        justify-content: center !important;
+    }
+}
