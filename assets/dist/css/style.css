@@ -323,10 +323,21 @@ body .btn-login-drawer {
     text-align: center !important;
 }
 
-.duaputra-body .hero-image-kustom img,
-.duaputra-body .about-image-kustom img {
+.duaputra-body .about-image-kustom {
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+
+.duaputra-body .about-image-kustom img,
+.about-image-kustom img {
+    width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;
+    /* Ubah ini: Biarkan dia memenuhi 100% kolom sebelah kiri */
+    height: 450px !important;
+    /* Ubah ini: Tinggikan gambarnya biar seimbang sama tinggi teks */
+    object-fit: cover !important;
+    /* KUNCI ANTI GEPENG */
     border-radius: 30px !important;
     box-shadow: var(--shadow-lg) !important;
 }

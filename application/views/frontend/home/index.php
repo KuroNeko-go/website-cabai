@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="hero-image-kustom">
-            <img src="<?= base_url('assets/dist/img/photo3.jpg') ?>" alt="Duaputra Hero Image">
+            <img src="<?= base_url('assets/dist/img/ilustrasi-cabai-rawit-merah_169.jpeg') ?>" alt="Duaputra Hero Image">
         </div>
     </div>
 </section>
@@ -56,7 +56,7 @@
 <section class="about-duaputra">
     <div class="about-grid-kustom">
         <div class="about-image-kustom">
-            <img src="<?= base_url('assets/dist/img/photo2.png') ?>" alt="Tentang Duaputra">
+            <img src="<?= base_url('assets/dist/img/cabai.jpg') ?>" alt="Tentang Duaputra">
         </div>
         <div class="about-content-kustom">
             <h3>TENTANG KAMI</h3>
