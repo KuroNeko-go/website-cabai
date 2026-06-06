@@ -328,16 +328,19 @@ body .btn-login-drawer {
     min-width: 0 !important;
 }
 
-
-.duaputra-body .about-image-kustom img,
-.about-image-kustom img {
+.duaputra-body .hero-image-kustom img {
     width: 100% !important;
-    max-width: 100% !important;
-    /* Ubah ini: Biarkan dia memenuhi 100% kolom sebelah kiri */
-    height: 450px !important;
-    /* Ubah ini: Tinggikan gambarnya biar seimbang sama tinggi teks */
+    max-width: 500px !important;
+    height: auto !important;
+    border-radius: 30px !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.duaputra-body .about-image-kustom img {
+    width: 100% !important;
+    max-width: 500px !important;
+    height: 350px !important;
     object-fit: cover !important;
-    /* KUNCI ANTI GEPENG */
     border-radius: 30px !important;
     box-shadow: var(--shadow-lg) !important;
 }

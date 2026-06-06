@@ -56,7 +56,7 @@
 <section class="about-duaputra">
     <div class="about-grid-kustom">
         <div class="about-image-kustom">
-            <img src="<?= base_url('assets/dist/img/cabai.jpg') ?>" alt="Tentang Duaputra">
+            <img src="<?= base_url('assets/dist/img/cabbai.webp') ?>" alt="Tentang Duaputra">
         </div>
         <div class="about-content-kustom">
             <h3>TENTANG KAMI</h3>
