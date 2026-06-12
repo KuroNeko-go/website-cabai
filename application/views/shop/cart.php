@@ -11,7 +11,7 @@
             <?php endif; ?>
             
             <?php if (empty($cart_items)): ?>
-                <div class="alert alert-info">Keranjang belanja Anda kosong. <a href="<?= base_url('shop'); ?>">Belanja sekarang!</a></div>
+                <div class="alert alert-info">Keranjang belanja Anda kosong. <a href="<?= base_url('home/index'); ?>">Belanja sekarang!</a></div>
             <?php else: ?>
                 <table class="table table-bordered">
                     <thead>

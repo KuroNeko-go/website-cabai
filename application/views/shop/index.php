@@ -1,4 +1,3 @@
-<!-- BANNER ATAS HORTIKULTURA BIBIT -->
 <section style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 5rem 0 3rem 0; text-align: center;">
     <div class="container">
         <h1 style="font-weight: 800; color: #2d6a4f; font-size: 2.5rem; margin-bottom: 0.5rem;">
@@ -10,12 +9,11 @@
     </div>
 </section>
 
-<!-- GRID PRODUK BIBIT -->
 <section style="padding: 5rem 0; background: #f5f7fa;">
     <div class="container">
 
         <?php if (!empty($bibits)): ?>
-            <div class="product-grid">
+            <div class="row">
                 <?php foreach ($bibits as $index => $b): ?>
                     <?php
                         $nama_produk = '';
@@ -24,47 +22,44 @@
                         elseif (isset($b['nama']))            $nama_produk = $b['nama'];
                         else                                  $nama_produk = 'Bibit Unggul Duaputra';
                     ?>
-                    <div class="product-card card-item-<?= ($index % 10) + 1 ?>">
+                    
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        
+                        <div class="card h-100 card<?= ($index % 10) + 1 ?>">
 
-                        <!-- Badge & Wishlist -->
-                        <div class="product-badge">Varietas Unggul</div>
-                        <div class="product-wishlist">♥</div>
+                            <div class="card-badge">Varietas Unggul</div>
+                            <div class="card-wishlist">♥</div>
 
-                        <!-- Gambar Produk -->
-                        <div class="product-image">
                             <?php if (!empty($b['gambar'])): ?>
-                                <img src="<?= base_url($b['gambar']) ?>" alt="<?= $nama_produk ?>">
+                                <div class="card-image" style="background-image: url('<?= base_url($b['gambar']) ?>');"></div>
                             <?php else: ?>
-                                <div class="product-image-placeholder">
-                                    <i class="fas fa-seedling"></i>
+                                <div class="card-image d-flex align-items-center justify-content-center" style="background-color: #ddd;">
+                                    <i class="fas fa-seedling" style="font-size: 3rem; color: #aaa;"></i>
                                 </div>
                             <?php endif; ?>
-                        </div>
 
-                        <!-- Konten -->
-                        <div class="product-content">
-                            <p class="product-category">Bibit Hortikultura</p>
-                            <h3 class="product-title"><?= $nama_produk ?></h3>
-                            <p class="product-desc">
-                                <?= !empty($b['deskripsi']) ? (strlen($b['deskripsi']) > 80 ? substr($b['deskripsi'], 0, 80) . '...' : $b['deskripsi']) : 'Bibit tanaman pilihan dengan persentase tumbuh tinggi, perakaran kuat, dan bebas penyakit.' ?>
-                            </p>
-                            <div class="product-price">
-                                <span class="price-current">
+                            <div class="card-content d-flex flex-column h-100">
+                                <p class="card-category">Bibit Hortikultura</p>
+                                <h2 class="card-title" style="font-size: 1.2rem;"><?= $nama_produk ?></h2>
+                                <div class="card-rating">★★★★★ <span>(4.8)</span></div>
+                                
+                                <div class="card-price mt-auto">
                                     Rp <?= isset($b['harga']) ? number_format($b['harga'], 0, ',', '.') : '0' ?>
-                                </span>
+                                </div>
+                                
+                                <a href="<?= base_url('bibit/detail/' . $b['id']) ?>" class="card-btn w-100 text-center" style="display:block; padding:10px;">
+                                    <i class="fas fa-eye"></i> Lihat Detail
+                                </a>
                             </div>
-                            <a href="<?= base_url('bibit/detail/' . $b['id']) ?>" class="product-btn">
-                                <i class="fas fa-eye"></i> Lihat Detail
-                            </a>
-                        </div>
 
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
 
         <?php else: ?>
-            <div class="product-empty">
-                <div class="product-empty-icon">
+            <div class="product-empty text-center" style="padding: 3rem 0;">
+                <div class="product-empty-icon" style="font-size: 4rem; color: #28a745; margin-bottom: 1rem;">
                     <i class="fas fa-seedling"></i>
                 </div>
                 <h3>Stok Bibit Belum Tersedia</h3>

@@ -1,4 +1,3 @@
-<!-- BANNER ATAS HORTIKULTURA -->
 <section style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 5rem 0 3rem 0; text-align: center;">
     <div class="container">
         <h1 style="font-weight: 800; color: #2d6a4f; font-size: 2.5rem; margin-bottom: 0.5rem;">
@@ -10,56 +9,57 @@
     </div>
 </section>
 
-<!-- GRID PRODUK CABAI -->
 <section style="padding: 5rem 0; background: #f5f7fa;">
     <div class="container">
 
         <?php if (!empty($cabais)): ?>
-            <div class="product-grid">
+            <div class="row">
                 <?php foreach ($cabais as $index => $c): ?>
-                    <div class="product-card card-item-<?= ($index % 10) + 1 ?>">
+                    
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        
+                        <div class="card h-100 card<?= ($index % 10) + 1 ?>">
 
-                        <!-- Badge & Wishlist -->
-                        <div class="product-badge">Cabai Unggulan</div>
-                        <div class="product-wishlist">♥</div>
+                            <div class="card-badge">Cabai Unggulan</div>
+                            <div class="card-wishlist">♥</div>
 
-                        <!-- Gambar Produk -->
-                        <div class="product-image">
                             <?php if (!empty($c['gambar'])): ?>
-                                <img src="<?= base_url($c['gambar']) ?>" alt="<?= $c['nama_varietas'] ?>">
+                                <div class="card-image" style="background-image: url('<?= base_url($c['gambar']) ?>');"></div>
                             <?php else: ?>
-                                <div class="product-image-placeholder">
-                                    <i class="fas fa-pepper-hot"></i>
+                                <div class="card-image d-flex align-items-center justify-content-center" style="background-color: #ddd;">
+                                    <i class="fas fa-pepper-hot" style="font-size: 3rem; color: #aaa;"></i>
                                 </div>
                             <?php endif; ?>
-                        </div>
 
-                        <!-- Konten -->
-                        <div class="product-content">
-                            <p class="product-category">
-                                <?= !empty($c['nama_latin']) ? $c['nama_latin'] : 'Capsicum Annuum' ?>
-                            </p>
-                            <h3 class="product-title"><?= $c['nama_varietas'] ?></h3>
-                            <p class="product-desc">
-                                <?= !empty($c['deskripsi']) ? (strlen($c['deskripsi']) > 80 ? substr($c['deskripsi'], 0, 80) . '...' : $c['deskripsi']) : 'Benih cabai unggulan dengan daya tahan tinggi terhadap penyakit dan adaptif di segala cuaca.' ?>
-                            </p>
-                            <div class="product-price">
-                                <span class="price-current">
-                                    Rp <?= isset($c['harga']) ? number_format($c['harga'], 0, ',', '.') : '0' ?>
-                                </span>
+                            <div class="card-content d-flex flex-column h-100">
+                                <p class="card-category">
+                                    <?= !empty($c['nama_latin']) ? $c['nama_latin'] : 'Capsicum Annuum' ?>
+                                </p>
+                                <h2 class="card-title" style="font-size: 1.2rem;"><?= $c['nama_varietas'] ?></h2>
+                                
+                                <p style="font-size: 0.85rem; color: #7f8c8d; margin-bottom: 15px;">
+                                    <?= !empty($c['deskripsi']) ? (strlen($c['deskripsi']) > 80 ? substr($c['deskripsi'], 0, 80) . '...' : $c['deskripsi']) : 'Benih cabai unggulan dengan daya tahan tinggi terhadap penyakit dan adaptif di segala cuaca.' ?>
+                                </p>
+
+                                <div class="card-rating">★★★★★ <span>(4.9)</span></div>
+                                
+                                <div class="card-price mt-auto">
+                                    <span style="font-size: 1.2rem;">Rp <?= isset($c['harga']) ? number_format($c['harga'], 0, ',', '.') : '0' ?></span>
+                                </div>
+                                
+                                <a href="<?= base_url('cabai/detail/' . $c['id']) ?>" class="card-btn w-100 text-center" style="display:block; padding:10px;">
+                                    <i class="fas fa-eye"></i> Lihat Detail
+                                </a>
                             </div>
-                            <a href="<?= base_url('cabai/detail/' . $c['id']) ?>" class="product-btn">
-                                <i class="fas fa-eye"></i> Lihat Detail
-                            </a>
-                        </div>
 
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
 
         <?php else: ?>
-            <div class="product-empty">
-                <div class="product-empty-icon">
+            <div class="product-empty text-center" style="padding: 3rem 0;">
+                <div class="product-empty-icon" style="font-size: 4rem; color: #e74c3c; margin-bottom: 1rem;">
                     <i class="fas fa-pepper-hot"></i>
                 </div>
                 <h3>Stok Cabai Belum Tersedia</h3>
