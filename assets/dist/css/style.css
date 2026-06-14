@@ -1712,192 +1712,159 @@ body.login-page::before {
     }
 }
 
+
 /* ========================================================
-   OVERRIDE DARK MODE UNTUK TEMA KUSTOM DUAPUTRA
+   DARK MODE — DUAPUTRA (CLEAN, KOMPREHENSIF, TANPA KONFLIK)
    ======================================================== */
 
-/* 1. Navbar Utama & Sidebar Drawer */
-body.dark-mode .navbar,
-body.dark-mode .sidebar-drawer {
-    background-color: #343a40 !important;
-    border-bottom: 1px solid #4b545c;
-}
-
-/* 2. Teks Navbar (Logo, Keranjang, Menu) */
-body.dark-mode .logo-text,
-body.dark-mode .logo-tagline,
-body.dark-mode .cart-icon,
-body.dark-mode .btn-burger-kustom {
-    color: #ffffff !important;
-}
-
-/* 3. Latar Belakang Konten Utama Aplikasi */
-body.dark-mode .duaputra-body,
+/* --- BASE & WRAPPER --- */
+body.dark-mode,
+body.dark-mode .wrapper,
 body.dark-mode .content-wrapper,
-body.dark-mode .footer-duaputra {
-    background-color: #454d55 !important;
-    color: #ffffff !important;
-}
-
-body.dark-mode .footer-duaputra h4,
-body.dark-mode .footer-duaputra p {
+body.dark-mode .duaputra-body {
+    background-color: #1a1f23 !important;
     color: #d2d6de !important;
 }
 
-/* 4. Tombol Kembali (Mencegah style inline putih) */
-body.dark-mode button[onclick="goBack()"] {
-    background-color: #3f474e !important;
-    color: #ffffff !important;
-    border-color: #6c757d !important;
+/* --- NAVBAR & DRAWER --- */
+body.dark-mode .navbar {
+    background: rgba(26, 31, 35, 0.95) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* 5. Teks di dalam Drawer Menu */
+body.dark-mode .navbar.scrolled {
+    background-color: #1a1f23 !important;
+}
+
+body.dark-mode .sidebar-drawer {
+    background-color: #22282d !important;
+}
+
+body.dark-mode .logo-text,
+body.dark-mode .logo-tagline {
+    color: #ffffff !important;
+}
+
+body.dark-mode .cart-icon,
+body.dark-mode .btn-burger-kustom {
+    color: #d2d6de !important;
+}
+
+body.dark-mode button[onclick="goBack()"] {
+    background: rgba(45, 106, 79, 0.3) !important;
+    border-color: rgba(82, 183, 136, 0.4) !important;
+    color: #52b788 !important;
+}
+
 body.dark-mode .drawer-menu a {
-    color: #c2c7d0 !important;
+    color: #d2d6de !important;
 }
 
 body.dark-mode .drawer-menu a:hover {
-    color: #ffffff !important;
-    background-color: #4b545c !important;
+    background: rgba(82, 183, 136, 0.15) !important;
+    color: #52b788 !important;
 }
 
-/* ========================================================
-   TAMBAHAN OVERRIDE DARK MODE (UNTUK BERANDA & KARTU)
-   ======================================================== */
-
-/* 1. Background Halaman Beranda (Hero Section) & Teksnya */
-body.dark-mode .hero-duaputra {
-    background-color: #343a40 !important;
-    /* Latar belakang Hero jadi gelap */
+body.dark-mode .drawer-overlay {
+    background: rgba(0, 0, 0, 0.6) !important;
 }
 
-body.dark-mode .hero-content-kustom h1,
-body.dark-mode .hero-content-kustom p,
-body.dark-mode .hero-content-kustom span {
-    color: #ffffff !important;
-    /* Memunculkan teks yang hilang di Beranda */
+/* --- HERO SECTION --- */
+body.dark-mode .duaputra-body .hero-duaputra {
+    background: linear-gradient(135deg, #1e2d22 0%, #22342a 100%) !important;
 }
 
-/* Jika ada section/pembungkus lain di Beranda yang masih putih */
-body.dark-mode .section,
-body.dark-mode section {
-    background-color: #454d55 !important;
-}
-
-/* 2. Judul Section (seperti "Produk Terbaru") */
-body.dark-mode h2.section-title,
-body.dark-mode .section-header h2 {
+body.dark-mode .hero-content-kustom h1 {
     color: #ffffff !important;
 }
 
-/* 3. Kartu Produk (Cards) di halaman bibit/cabai */
-body.dark-mode .card,
-body.dark-mode .card-body {
-    background-color: #343a40 !important;
-    color: #ffffff !important;
-    border-color: #4b545c !important;
+body.dark-mode .hero-content-kustom h1 span {
+    color: #52b788 !important;
 }
 
-body.dark-mode .card-title,
-body.dark-mode .card-text,
-body.dark-mode .product-title {
-    color: #ffffff !important;
+body.dark-mode .hero-content-kustom p {
+    color: #adb5bd !important;
 }
 
-/* Biar harga produk tetap ngejreng di mode gelap */
-body.dark-mode .product-price,
-body.dark-mode .text-success {
-    color: #4caf50 !important;
-    /* Hijau yang lebih terang/cocok untuk gelap */
+/* --- STATS SECTION --- */
+body.dark-mode .duaputra-body .stats-duaputra {
+    background: #111815 !important;
 }
 
-/* 4. Background Global Body (Berjaga-jaga jika ada ruang kosong) */
-body.dark-mode {
-    background-color: #454d55 !important;
-    color: #ffffff !important;
+body.dark-mode .stat-card-kustom .num {
+    color: #ff9f1c !important;
 }
 
-/* 5. Paragraf dan Text Umum */
-body.dark-mode p,
-body.dark-mode .about-description,
-body.dark-mode .about-description-small,
+body.dark-mode .stat-card-kustom .lbl,
 body.dark-mode .lbl {
-    color: #d2d6de !important;
+    color: #c8d6c9 !important;
 }
 
-/* 6. Stat Cards */
-body.dark-mode .stat-card-kustom,
-body.dark-mode .stats-grid-kustom {
-    background-color: #343a40 !important;
+/* --- FEATURES SECTION --- */
+body.dark-mode .duaputra-body .features-duaputra {
+    background: #1e2428 !important;
+}
+
+body.dark-mode .duaputra-body .title-seksi h2 {
     color: #ffffff !important;
 }
 
-body.dark-mode .stat-card-kustom .num,
-body.dark-mode .stat-card-kustom .lbl {
+body.dark-mode .duaputra-body .title-seksi h2::after {
+    background: #52b788 !important;
+}
+
+body.dark-mode .about-description,
+body.dark-mode .duaputra-body .title-seksi p {
+    color: #adb5bd !important;
+}
+
+body.dark-mode .duaputra-body .feature-card-kustom {
+    background: #2d3339 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .feature-card-kustom h4 {
     color: #ffffff !important;
 }
 
-/* 7. Feature Cards */
-body.dark-mode .feature-card-kustom {
-    background-color: #343a40 !important;
-    color: #d2d6de !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode .feature-card-kustom h4,
+body.dark-mode .about-description-small,
 body.dark-mode .feature-card-kustom p {
-    color: #d2d6de !important;
+    color: #adb5bd !important;
 }
 
 body.dark-mode .feature-icon {
-    background-color: rgba(76, 175, 80, 0.2) !important;
-    color: #4caf50 !important;
+    background: rgba(82, 183, 136, 0.15) !important;
+    color: #52b788 !important;
 }
 
-/* 8. Buttons dalam Dark Mode */
-body.dark-mode .btn-primary {
-    background-color: #4caf50 !important;
-    border-color: #4caf50 !important;
+/* --- ABOUT SECTION --- */
+body.dark-mode .duaputra-body .about-duaputra {
+    background: #1a1f23 !important;
+}
+
+body.dark-mode .about-content-kustom h3 {
+    color: #ff9f1c !important;
+}
+
+body.dark-mode .about-content-kustom h2 {
     color: #ffffff !important;
 }
 
-body.dark-mode .btn-primary:hover {
-    background-color: #45a049 !important;
-    border-color: #45a049 !important;
-}
-
-body.dark-mode .btn-outline {
-    background-color: transparent !important;
-    border-color: #4caf50 !important;
-    color: #4caf50 !important;
-}
-
-body.dark-mode .btn-outline:hover {
-    background-color: #4caf50 !important;
-    color: #343a40 !important;
-}
-
-/* 9. About Section */
-body.dark-mode .about-grid-kustom {
-    background-color: #454d55 !important;
-    color: #d2d6de !important;
-}
-
-body.dark-mode .about-content-kustom h3,
-body.dark-mode .about-content-kustom h2,
-body.dark-mode .about-stat-label,
-body.dark-mode .about-stat-item {
-    color: #ffffff !important;
+body.dark-mode .about-content-kustom p {
+    color: #adb5bd !important;
 }
 
 body.dark-mode .about-stat-item .n {
-    color: #4caf50 !important;
+    color: #52b788 !important;
 }
 
-/* 10. CTA Section */
-body.dark-mode .cta-duaputra {
-    background: linear-gradient(135deg, #343a40, #454d55) !important;
-    color: #ffffff !important;
+body.dark-mode .about-stat-label {
+    color: #adb5bd !important;
+}
+
+/* --- CTA SECTION --- */
+body.dark-mode .duaputra-body .cta-duaputra {
+    background: linear-gradient(135deg, #0d2318 0%, #1b4d3e 100%) !important;
 }
 
 body.dark-mode .cta-duaputra h2,
@@ -1905,177 +1872,44 @@ body.dark-mode .cta-duaputra p {
     color: #ffffff !important;
 }
 
-/* 11. Links dan Text Decoration */
-body.dark-mode a {
-    color: #4caf50 !important;
-}
-
-body.dark-mode a:hover {
-    color: #66bb6a !important;
-}
-
-/* 12. Form Elements */
-body.dark-mode input,
-body.dark-mode textarea,
-body.dark-mode select {
-    background-color: #343a40 !important;
+/* --- TOMBOL --- */
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #2d6a4f, #40916c) !important;
     color: #ffffff !important;
-    border-color: #4b545c !important;
+    border-color: transparent !important;
 }
 
-body.dark-mode input::placeholder,
-body.dark-mode textarea::placeholder {
-    color: #8a94a3 !important;
+body.dark-mode .btn-outline {
+    border-color: #52b788 !important;
+    color: #52b788 !important;
+    background: transparent !important;
 }
 
-/* 13. Table Elements */
-body.dark-mode table,
-body.dark-mode thead,
-body.dark-mode tbody,
-body.dark-mode tr,
-body.dark-mode td,
-body.dark-mode th {
-    background-color: #343a40 !important;
-    color: #d2d6de !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode thead th {
-    background-color: #454d55 !important;
+body.dark-mode .btn-outline:hover {
+    background: #52b788 !important;
     color: #ffffff !important;
 }
 
-/* 14. Product Cards (untuk halaman shop) */
+/* --- PRODUCT CARDS --- */
 body.dark-mode .product-card {
-    background-color: #343a40 !important;
-    color: #d2d6de !important;
-}
-
-body.dark-mode .product-card .product-info {
-    background-color: #343a40 !important;
-    color: #d2d6de !important;
-}
-
-body.dark-mode .product-name,
-body.dark-mode .product-category {
-    color: #ffffff !important;
-}
-
-/* 15. Cart & Checkout Elements */
-body.dark-mode .cart-item,
-body.dark-mode .checkout-form {
-    background-color: #343a40 !important;
-    color: #d2d6de !important;
-}
-
-body.dark-mode .order-summary {
-    background-color: #454d55 !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode .order-summary h5 {
-    color: #ffffff !important;
-}
-
-/* 16. Alert & Messages */
-body.dark-mode .alert {
-    background-color: #343a40 !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode .alert-success {
-    background-color: rgba(76, 175, 80, 0.2) !important;
-    border-color: #4caf50 !important;
-    color: #4caf50 !important;
-}
-
-body.dark-mode .alert-danger {
-    background-color: rgba(244, 67, 54, 0.2) !important;
-    border-color: #f44336 !important;
-    color: #f44336 !important;
-}
-
-body.dark-mode .alert-warning {
-    background-color: rgba(255, 152, 0, 0.2) !important;
-    border-color: #ff9800 !important;
-    color: #ff9800 !important;
-}
-
-body.dark-mode .alert-info {
-    background-color: rgba(33, 150, 243, 0.2) !important;
-    border-color: #2196f3 !important;
-    color: #2196f3 !important;
-}
-
-/* 17. Modals & Dialogs */
-body.dark-mode .modal-content {
-    background-color: #343a40 !important;
-    color: #d2d6de !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode .modal-header,
-body.dark-mode .modal-footer {
-    background-color: #454d55 !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode .modal-title,
-body.dark-mode .modal-header .close {
-    color: #ffffff !important;
-}
-
-/* 18. Badge & Labels */
-body.dark-mode .badge {
-    background-color: #4caf50 !important;
-    color: #343a40 !important;
-}
-
-body.dark-mode .label {
-    color: #ffffff !important;
-}
-
-/* 19. Dropdown Menu */
-body.dark-mode .dropdown-menu {
-    background-color: #343a40 !important;
-    border-color: #4b545c !important;
-}
-
-body.dark-mode .dropdown-menu a,
-body.dark-mode .dropdown-item {
-    color: #d2d6de !important;
-}
-
-body.dark-mode .dropdown-menu a:hover,
-body.dark-mode .dropdown-item:hover {
-    background-color: #4b545c !important;
-    color: #ffffff !important;
-}
-
-
-/* ========================================================
-   DARK MODE — PRODUCT CARDS (CLASS BARU)
-   ======================================================== */
-body.dark-mode .product-card {
-    background-color: #2d3339 !important;
-    border-color: #4b545c !important;
+    background: #2d3339 !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
 body.dark-mode .product-content {
-    background-color: #2d3339 !important;
+    background: #2d3339 !important;
 }
 
 body.dark-mode .product-title {
     color: #ffffff !important;
 }
 
-body.dark-mode .product-desc {
-    color: #adb5bd !important;
-}
-
 body.dark-mode .product-category {
     color: #52b788 !important;
+}
+
+body.dark-mode .product-desc {
+    color: #adb5bd !important;
 }
 
 body.dark-mode .price-current {
@@ -2099,18 +1933,197 @@ body.dark-mode .product-empty p {
     color: #868e96 !important;
 }
 
-/* Section background di halaman produk */
-body.dark-mode section {
-    background-color: #1e2428 !important;
+/* --- FOOTER --- */
+body.dark-mode .footer-duaputra {
+    background: #111518 !important;
+    border-top: 1px solid #2d3339 !important;
 }
 
-body.dark-mode section h1,
-body.dark-mode section p {
+body.dark-mode .footer-duaputra h4,
+body.dark-mode .footer-duaputra p {
     color: #d2d6de !important;
 }
 
-/* Scrolled navbar */
-body.dark-mode .navbar.scrolled {
+body.dark-mode .footer-bottom {
+    color: #868e96 !important;
+    border-top-color: #2d3339 !important;
+}
+
+/* --- FORM & INPUT --- */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
     background-color: #2d3339 !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    border-color: #4b545c !important;
+    color: #d2d6de !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #868e96 !important;
+}
+
+/* --- ADMINLTE CARD (halaman admin) --- */
+body.dark-mode .card,
+body.dark-mode .card-body,
+body.dark-mode .card-header,
+body.dark-mode .card-footer {
+    background-color: #2d3339 !important;
+    border-color: #4b545c !important;
+    color: #d2d6de !important;
+}
+
+body.dark-mode .card-title,
+body.dark-mode .card-text {
+    color: #ffffff !important;
+}
+
+/* --- DROPDOWN --- */
+body.dark-mode .dropdown-menu {
+    background-color: #2d3339 !important;
+    border-color: #4b545c !important;
+}
+
+body.dark-mode .dropdown-menu a,
+body.dark-mode .dropdown-item {
+    color: #d2d6de !important;
+}
+
+body.dark-mode .dropdown-menu a:hover,
+body.dark-mode .dropdown-item:hover {
+    background-color: #4b545c !important;
+    color: #ffffff !important;
+}
+
+/* --- CART & CHECKOUT --- */
+body.dark-mode .cart-item,
+body.dark-mode .checkout-form {
+    background-color: #2d3339 !important;
+    color: #d2d6de !important;
+}
+
+body.dark-mode .order-summary {
+    background-color: #2d3339 !important;
+    border-color: #4b545c !important;
+}
+
+/* --- TABEL --- */
+body.dark-mode table,
+body.dark-mode .table {
+    color: #d2d6de !important;
+}
+
+body.dark-mode .table thead th {
+    background-color: #1b4d3e !important;
+    color: #ffffff !important;
+    border-color: #4b545c !important;
+}
+
+body.dark-mode .table td,
+body.dark-mode .table th {
+    border-color: #4b545c !important;
+}
+
+body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* 1. Paksa Semua Background Section Beranda Menjadi Gelap */
+body.dark-mode.dark-mode.dark-mode .duaputra-body section,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .hero-duaputra,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .stats-duaputra,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .features-duaputra,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .about-duaputra,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .cta-duaputra {
+    background-color: #343a40;
+    background-image: none;
+}
+
+/* 2. Paksa Semua Teks Judul, Paragraf & Angka Menjadi Putih Terang */
+body.dark-mode.dark-mode.dark-mode .duaputra-body section h1,
+body.dark-mode.dark-mode.dark-mode .duaputra-body section h2,
+body.dark-mode.dark-mode.dark-mode .duaputra-body section h3,
+body.dark-mode.dark-mode.dark-mode .duaputra-body section p,
+body.dark-mode.dark-mode.dark-mode .duaputra-body section span,
+body.dark-mode.dark-mode.dark-mode .duaputra-body section li,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .stat-card-kustom .num,
+body.dark-mode.dark-mode.dark-mode .duaputra-body .stat-card-kustom .lbl {
+    color: #ffffff;
+}
+
+/* 3. Rapihkan Kotak Statistik & Fitur (Biar menonjol, pakai abu-abu terang sedikit) */
+
+body.dark-mode.dark-mode.dark-mode .duaputra-body .feature-card {
+    background-color: #454d55 !important;
+    border: 1px solid #4b545c !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ========================================================
+   MENGHILANGKAN JARAK (GAP) ANTARA CTA DAN FOOTER
+   ======================================================== */
+
+/* 1. Hilangkan sisa bantalan (padding/margin) di bagian bawah konten utama */
+.content-wrapper,
+.duaputra-body {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* 2. Hilangkan dorongan margin bawah dari section CTA */
+.cta-duaputra {
+    margin-bottom: 0 !important;
+}
+
+/* 3. Tarik footer ke atas (jika ada margin top) */
+.footer-duaputra {
+    margin-top: 0 !important;
+}
+
+/* ========================================================
+   DARK MODE KHUSUS HALAMAN CABAI & BIBIT (INLINE STYLES)
+   ======================================================== */
+
+/* 1. Ubah Header Gradient Terang Jadi Hijau Gelap */
+body.dark-mode section[style*="linear-gradient(135deg, #e8f5e9"] {
+    background: linear-gradient(135deg, #1e2d22 0%, #22342a 100%) !important;
+}
+
+/* 2. Ubah Latar Belakang List Produk Terang Jadi Gelap */
+body.dark-mode section[style*="background: #f5f7fa"] {
+    background-color: #22282d !important;
+    /* Biar sama kayak background body */
+}
+
+/* 3. Paksa Teks Judul dan Deskripsi yang Warnanya Dikunci HTML Biar Jadi Putih */
+body.dark-mode section[style*="background"] h1[style*="color: #2d6a4f"],
+body.dark-mode section[style*="background"] p[style*="color: #4a5b4e"] {
+    color: #ffffff !important;
+}
+
+
+body.dark-mode div[style*="background: #f8faf7"] {
+    background: #2d3339 !important;
+    /* Ubah background kotak jadi abu-abu gelap */
+    border: 1px solid #4b545c !important;
+    /* Tambah garis pinggir dikit biar rapi */
+}
+
+/* Putihkan semua teks di dalam kotak tersebut */
+body.dark-mode div[style*="background: #f8faf7"] *,
+body.dark-mode div[style*="background: #f8faf7"] div {
+    color: #ffffff !important;
+}
+
+
+body.dark-mode h1[style*="color: #1a2c1e"],
+body.dark-mode h1[style*="color"] {
+    color: #ffffff !important;
+}
+
+/* Sekalian jaga-jaga kalau ada teks 'Kembali ke Toko Bibit' yang nyaru */
+body.dark-mode a[style*="color: #4CAF50"] {
+    color: #66bb6a !important;
+    /* Hijau yang lebih terang biar kebaca di background gelap */
 }

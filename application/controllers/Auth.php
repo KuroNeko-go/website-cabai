@@ -22,7 +22,14 @@ class Auth extends CI_Controller {
         $this->load->view('admin/auth/login', $data);
     }
 
+    public function register()
+    {
+        $data['title'] = 'Register Akun - CabaiNusa';
+        $this->load->view('admin/auth/register', $data); // Pastikan path-nya sesuai lokasi file lu
+    }
+
     // Proses Login
+    // --- PERBAIKAN FUNGSI LOGIN ---
     public function do_login()
     {
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -41,18 +48,15 @@ class Auth extends CI_Controller {
                     'logged_in' => TRUE,
                     'user_id' => $user['id'],
                     'username' => $user['username'],
-                    'nama_lengkap' => $user['nama_lengkap'],
-                    'email' => $user['email'],
-                    'role' => $user['role'],
-                    'foto' => $user['foto']
+                    'role' => $user['role']
                 ];
                 $this->session->set_userdata($session_data);
                 
-                // Redirect berdasarkan role
-                if ($user['role'] == 'admin') {
-                    redirect('dashboard');
+                // Arahkan berdasarkan Role
+                if ($user['role'] == 'admin' || $user['role'] == 'staff') {
+                    redirect('dashboard'); 
                 } else {
-                    redirect('dashboard');
+                    redirect('home'); 
                 }
             } else {
                 $this->session->set_flashdata('error', 'Username atau password salah!');
@@ -61,19 +65,7 @@ class Auth extends CI_Controller {
         }
     }
 
-    // Halaman Register
-    public function register()
-    {
-        // Jika sudah login, redirect ke dashboard
-        if ($this->session->userdata('logged_in')) {
-            redirect('dashboard');
-        }
-
-        $data['title'] = 'Register Akun - CabaiNusa';
-        $this->load->view('admin/auth/register', $data);
-    }
-
-    // Proses Register
+    // --- PERBAIKAN FUNGSI REGISTER ---
     public function do_register()
     {
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|min_length[3]');
@@ -89,16 +81,17 @@ class Auth extends CI_Controller {
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
-                'password' => $this->input->post('password'),
-                'role' => 'staff', // Default role staff
+                // PENTING: Password harus di-hash biar aman!
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT), 
+                'role' => 'user', // SEKARANG PASTI JADI 'user'
                 'is_active' => 1
             ];
 
             if ($this->User_model->register($data)) {
                 $this->session->set_flashdata('success', 'Registrasi berhasil! Silakan login.');
-                redirect('auth/login');
+                redirect('auth/register');
             } else {
-                $this->session->set_flashdata('error', 'Registrasi gagal! Silakan coba lagi.');
+                $this->session->set_flashdata('error', 'Registrasi gagal!');
                 redirect('auth/register');
             }
         }
@@ -128,7 +121,7 @@ class Auth extends CI_Controller {
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('auth/login');
+        redirect('admin/auth/login');
     }
 
     // Lupa Password (halaman)
@@ -152,10 +145,10 @@ class Auth extends CI_Controller {
             if ($user) {
                 // Kirim email reset password (implementasi sederhana)
                 $this->session->set_flashdata('success', 'Link reset password telah dikirim ke email Anda.');
-                redirect('auth/login');
+                redirect('admin/auth/login');
             } else {
                 $this->session->set_flashdata('error', 'Email tidak terdaftar!');
-                redirect('auth/forgot_password');
+                redirect('admin/auth/forgot_password');
             }
         }
     }
