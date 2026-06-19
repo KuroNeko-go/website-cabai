@@ -49,7 +49,7 @@ class User_model extends CI_Model {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['is_active'] = 1;
-        $data['role'] = 'user'; // Default role staff untuk user baru
+        $data['role'] = 'user'; // Default role user untuk user baru
         
         return $this->db->insert($this->table, $data);
     }
