@@ -48,5 +48,36 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/dist/js/adminlte.min.js') ?>"></script>
 
+<!-- SCRIPT DARK MODE ADMINLTE -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const iconTheme = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
+        const bodyElement = document.body; // Langsung target tag <body> tanpa butuh ID
+
+        if (themeToggleBtn) {
+            // 1. Cek LocalStorage saat halaman pertama dimuat
+            if (localStorage.getItem('theme') === 'dark') {
+                bodyElement.classList.add('dark-mode');
+                if (iconTheme) iconTheme.classList.replace('fa-moon', 'fa-sun'); // Ubah ikon ke matahari
+            }
+
+            // 2. Logika saat tombol diklik
+            themeToggleBtn.addEventListener('click', () => {
+                bodyElement.classList.toggle('dark-mode');
+
+                // Simpan ke localStorage & ganti ikon
+                if (bodyElement.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    if (iconTheme) iconTheme.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    if (iconTheme) iconTheme.classList.replace('fa-sun', 'fa-moon');
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>

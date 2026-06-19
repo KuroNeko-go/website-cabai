@@ -49,7 +49,7 @@ class User_model extends CI_Model {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['is_active'] = 1;
-        $data['role'] = 'user'; // Default role user untuk user baru
+        $data['role'] = 'user'; // Default role staff untuk user baru
         
         return $this->db->insert($this->table, $data);
     }
@@ -106,6 +106,35 @@ class User_model extends CI_Model {
     public function count_all()
     {
         return $this->db->count_all($this->table);
+    }
+
+    /**
+     * Mengambil data user berdasarkan email
+     * Digunakan untuk fitur forgot password / reset password
+     */
+    public function get_by_email($email)
+    {
+        // Mencari data ke tabel 'users' yang kolom email-nya cocok
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+        
+        // Kalau datanya ketemu, balikin dalam bentuk array satu baris
+        if ($query->num_rows() == 1) {
+            return $query->row_array();
+        }
+        
+        // Kalau gak ada, balikin false
+        return FALSE;
+    }
+
+    /**
+     * Update password baru di database berdasarkan email
+     */
+    public function update_password($email, $new_password)
+    {
+        $this->db->set('password', $new_password);
+        $this->db->where('email', $email);
+        $this->db->update('users');
     }
 }
 ?>

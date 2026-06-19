@@ -6,227 +6,10 @@
     <title>Register Akun - CabaiNusa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1a3e15 0%, #2d7a24 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 40px 20px;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path fill="white" d="M50,0 L60,40 L100,50 L60,60 L50,100 L40,60 L0,50 L40,40 Z"/></svg>');
-            background-size: 60px;
-            pointer-events: none;
-        }
-        
-        .register-container {
-            width: 100%;
-            max-width: 500px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .register-card {
-            background: white;
-            border-radius: 32px;
-            padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-            animation: fadeInUp 0.6s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .register-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        
-        .logo-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #1a3e15, #2d7a24);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        
-        .logo-icon i {
-            font-size: 32px;
-            color: white;
-        }
-        
-        .register-header h2 {
-            color: #1a3e15;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .register-header p {
-            color: #6c757d;
-            font-size: 14px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e2f;
-            font-size: 14px;
-        }
-        
-        .input-group {
-            position: relative;
-        }
-        
-        .input-group i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #a0c4a0;
-            font-size: 18px;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 14px 16px 14px 48px;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #2d7a24;
-            box-shadow: 0 0 0 3px rgba(45, 122, 36, 0.1);
-        }
-        
-        .form-control.error {
-            border-color: #dc2626;
-        }
-        
-        .error-message {
-            color: #dc2626;
-            font-size: 12px;
-            margin-top: 6px;
-            display: block;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #a0c4a0;
-        }
-        
-        .btn-register {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #1a3e15, #2d7a24);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(45, 122, 36, 0.3);
-        }
-        
-        .alert {
-            padding: 14px 18px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .alert-danger {
-            background: #fee2e2;
-            color: #dc2626;
-            border-left: 4px solid #dc2626;
-        }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #2d7a24;
-        }
-        
-        .login-link {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #6c757d;
-            font-size: 14px;
-        }
-        
-        .login-link a {
-            color: #2d7a24;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-        
-        .password-requirement {
-            font-size: 12px;
-            color: #6c757d;
-            margin-top: 6px;
-        }
-        
-        @media (max-width: 480px) {
-            .register-card { padding: 30px 20px; }
-            .register-header h2 { font-size: 24px; }
-        }
-    </style>
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/style.css'); ?>">
 </head>
-<body>
+<body class="auth-page">
     <div class="register-container">
         <div class="register-card">
             <div class="register-header">
@@ -343,6 +126,26 @@
         
         passwordInput.addEventListener('change', checkPasswordMatch);
         confirmInput.addEventListener('keyup', checkPasswordMatch);
+    </script>
+    
+    <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.all.min.js'); ?>"></script>
+
+    <script>
+        <?php if($this->session->flashdata('success_register')): ?>
+            Swal.fire({
+                title: 'Akun Berhasil Dibuat!',
+                text: 'Registrasi Anda berhasil. Silakan lanjut ke halaman login.',
+                icon: 'success',
+                confirmButtonText: 'Login Sekarang',
+                confirmButtonColor: '#2d7a24',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?php echo base_url('auth/login'); ?>';
+                }
+            });
+        <?php endif; ?>
     </script>
 </body>
 </html>
