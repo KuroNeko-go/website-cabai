@@ -38,37 +38,57 @@ class Cart extends CI_Controller {
     {
         $id = $this->input->post('id');
         $qty = $this->input->post('qty', 1);
+        $tipe = $this->input->post('tipe');
         
-        $bibit = $this->Bibit_model->get_by_id($id);
+        // 1. Ambil Data Berdasarkan Tipe
+        if ($tipe == 'cabai') {
+            $this->load->model('Cabai_model');
+            $produk = $this->Cabai_model->get_by_id($id);
+            // Pake nama_varietas menyesuaikan tabel lu
+            $nama_produk = isset($produk['nama_varietas']) ? $produk['nama_varietas'] : 'Cabai'; 
+            // Kalau cabai gak ada kolom stok di database, anggap aja stoknya selalu ada (999)
+            $stok_produk = isset($produk['stok']) ? $produk['stok'] : 999; 
+        } else {
+            $this->load->model('Bibit_model');
+            $produk = $this->Bibit_model->get_by_id($id);
+            $nama_produk = isset($produk['nama_produk']) ? $produk['nama_produk'] : 'Bibit';
+            $stok_produk = isset($produk['stok']) ? $produk['stok'] : 0;
+        }
         
-        if (!$bibit) {
+        // 2. Validasi Ketersediaan
+        if (!$produk) {
             echo json_encode(['status' => 'error', 'message' => 'Produk tidak ditemukan']);
             return;
         }
         
-        if ($bibit['stok'] < $qty) {
+        if ($stok_produk < $qty) {
             echo json_encode(['status' => 'error', 'message' => 'Stok tidak mencukupi']);
             return;
         }
         
+        // 3. Eksekusi Keranjang
         $cart = $this->session->userdata('cart');
+        if (!is_array($cart)) $cart = []; // Pastikan selalu array biar gak error
         
-        if (isset($cart[$id])) {
-            $cart[$id]['qty'] += $qty;
+        $cart_key = $tipe . '_' . $id; 
+        
+        if (isset($cart[$cart_key])) {
+            $cart[$cart_key]['qty'] += $qty;
         } else {
-            $cart[$id] = [
-                'id' => $bibit['id'],
-                'name' => $bibit['nama_produk'],
-                'price' => $bibit['harga_diskon'] ?: $bibit['harga'],
-                'original_price' => $bibit['harga'],
+            $cart[$cart_key] = [
+                'id' => $produk['id'],
+                'tipe' => $tipe,
+                'name' => $nama_produk,
+                'price' => isset($produk['harga_diskon']) && $produk['harga_diskon'] > 0 ? $produk['harga_diskon'] : (isset($produk['harga']) ? $produk['harga'] : 0),
+                'original_price' => isset($produk['harga']) ? $produk['harga'] : 0,
                 'qty' => $qty,
-                'gambar' => $bibit['gambar']
+                'gambar' => isset($produk['gambar']) ? $produk['gambar'] : ''
             ];
         }
         
         $this->session->set_userdata('cart', $cart);
         
-        echo json_encode(['status' => 'success', 'message' => 'Produk ditambahkan ke keranjang']);
+        echo json_encode(['status' => 'success', 'message' => 'Produk berhasil masuk keranjang!']);
     }
 
     public function update()
@@ -196,9 +216,13 @@ class Cart extends CI_Controller {
         $transaksi_id = $this->Transaksi_model->save_transaksi($transaksi_data, $cart);
         
         if ($transaksi_id) {
-            // Kurangi stok
+            // Kurangi stok berdasarkan tipenya
             foreach ($cart as $item) {
-                $this->Bibit_model->reduce_stock($item['id'], $item['qty']);
+                if ($item['tipe'] == 'cabai') {
+                    $this->Cabai_model->reduce_stock($item['id'], $item['qty']);
+                } else {
+                    $this->Bibit_model->reduce_stock($item['id'], $item['qty']);
+                }
             }
             
             // Kosongkan keranjang

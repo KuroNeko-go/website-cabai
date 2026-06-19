@@ -62,6 +62,9 @@
             
             <!-- Bagian Kanan Navbar -->
             <div style="display: flex; align-items: center; gap: 1.25rem;">
+                <button id="theme-toggle" class="btn btn-sm btn-outline-secondary" style="border-radius: 50px; padding: 4px 10px;">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <!-- Ikon Keranjang Belanja -->
                 <a href="<?= base_url('cart') ?>" class="cart-icon">
                     <i class="fas fa-shopping-cart" style="font-size: 1.2rem;"></i>

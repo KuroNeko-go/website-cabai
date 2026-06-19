@@ -107,5 +107,34 @@ class User_model extends CI_Model {
     {
         return $this->db->count_all($this->table);
     }
+
+    /**
+     * Mengambil data user berdasarkan email
+     * Digunakan untuk fitur forgot password / reset password
+     */
+    public function get_by_email($email)
+    {
+        // Mencari data ke tabel 'users' yang kolom email-nya cocok
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+        
+        // Kalau datanya ketemu, balikin dalam bentuk array satu baris
+        if ($query->num_rows() == 1) {
+            return $query->row_array();
+        }
+        
+        // Kalau gak ada, balikin false
+        return FALSE;
+    }
+
+    /**
+     * Update password baru di database berdasarkan email
+     */
+    public function update_password($email, $new_password)
+    {
+        $this->db->set('password', $new_password);
+        $this->db->where('email', $email);
+        $this->db->update('users');
+    }
 }
 ?>

@@ -22,7 +22,14 @@ class Auth extends CI_Controller {
         $this->load->view('admin/auth/login', $data);
     }
 
+    public function register()
+    {
+        $data['title'] = 'Register Akun - CabaiNusa';
+        $this->load->view('admin/auth/register', $data); // Pastikan path-nya sesuai lokasi file lu
+    }
+
     // Proses Login
+    // --- PERBAIKAN FUNGSI LOGIN ---
     public function do_login()
     {
         $this->form_validation->set_rules('username', 'Username', 'required');
@@ -41,18 +48,15 @@ class Auth extends CI_Controller {
                     'logged_in' => TRUE,
                     'user_id' => $user['id'],
                     'username' => $user['username'],
-                    'nama_lengkap' => $user['nama_lengkap'],
-                    'email' => $user['email'],
-                    'role' => $user['role'],
-                    'foto' => $user['foto']
+                    'role' => $user['role']
                 ];
                 $this->session->set_userdata($session_data);
                 
-                // Redirect berdasarkan role
-                if ($user['role'] == 'admin') {
-                    redirect('dashboard');
+                // Arahkan berdasarkan Role
+                if ($user['role'] == 'admin' || $user['role'] == 'staff') {
+                    redirect('dashboard'); 
                 } else {
-                    redirect('dashboard');
+                    redirect('home'); 
                 }
             } else {
                 $this->session->set_flashdata('error', 'Username atau password salah!');
@@ -61,19 +65,7 @@ class Auth extends CI_Controller {
         }
     }
 
-    // Halaman Register
-    public function register()
-    {
-        // Jika sudah login, redirect ke dashboard
-        if ($this->session->userdata('logged_in')) {
-            redirect('dashboard');
-        }
-
-        $data['title'] = 'Register Akun - CabaiNusa';
-        $this->load->view('admin/auth/register', $data);
-    }
-
-    // Proses Register
+    // --- PERBAIKAN FUNGSI REGISTER ---
     public function do_register()
     {
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|min_length[3]');
@@ -89,16 +81,17 @@ class Auth extends CI_Controller {
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email'),
-                'password' => $this->input->post('password'),
-                'role' => 'staff', // Default role staff
+                // PENTING: Password harus di-hash biar aman!
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT), 
+                'role' => 'user', // SEKARANG PASTI JADI 'user'
                 'is_active' => 1
             ];
 
             if ($this->User_model->register($data)) {
-                $this->session->set_flashdata('success', 'Registrasi berhasil! Silakan login.');
-                redirect('auth/login');
+                $this->session->set_flashdata('success_register', TRUE);
+                redirect('auth/register');
             } else {
-                $this->session->set_flashdata('error', 'Registrasi gagal! Silakan coba lagi.');
+                $this->session->set_flashdata('error', 'Registrasi gagal!');
                 redirect('auth/register');
             }
         }
@@ -138,25 +131,73 @@ class Auth extends CI_Controller {
         $this->load->view('admin/auth/forgot_password', $data);
     }
 
-    // Proses Lupa Password (reset link)
+    // GANTI FUNGSI INI TOTAL:
     public function do_forgot_password()
     {
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         
         if ($this->form_validation->run() == FALSE) {
-            $this->forgot_password();
+            $data['title'] = 'Lupa Password - CabaiNusa';
+            $this->load->view('admin/auth/forgot_password', $data);
         } else {
             $email = $this->input->post('email');
             $user = $this->User_model->get_by_email($email);
             
             if ($user) {
-                // Kirim email reset password (implementasi sederhana)
-                $this->session->set_flashdata('success', 'Link reset password telah dikirim ke email Anda.');
-                redirect('auth/login');
+                // Simpan email ke session biar form reset tau punya siapa yang diganti
+                $this->session->set_userdata('reset_email', $email);
+                
+                // Langsung arahin ke form ngisi password baru
+                redirect('auth/reset_password'); 
             } else {
-                $this->session->set_flashdata('error', 'Email tidak terdaftar!');
+                $this->session->set_flashdata('error', 'Email tidak terdaftar di sistem kami!');
                 redirect('auth/forgot_password');
             }
+        }
+    }
+
+    // TAMBAH 2 FUNGSI BARU INI DI BAWAHNYA:
+    public function reset_password()
+    {
+        // Tolak kalau user nyelonong masuk tanpa lewat form lupa password
+        if (!$this->session->userdata('reset_email')) {
+            redirect('auth/forgot_password');
+        }
+
+        $data['title'] = 'Buat Password Baru - CabaiNusa';
+        $this->load->view('admin/auth/reset_password', $data); // (Pastiin jalurnya sesuai)
+    }
+
+    public function do_reset_password()
+    {
+        $email = $this->session->userdata('reset_email');
+        if (!$email) {
+            redirect('auth/forgot_password');
+        }
+
+        // Validasi form password baru
+        $this->form_validation->set_rules('password', 'Password Baru', 'required|min_length[6]', [
+            'min_length' => 'Password minimal 6 karakter!'
+        ]);
+        $this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]', [
+            'matches' => 'Password konfirmasi tidak sama!'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->reset_password();
+        } else {
+            // Hash password barunya
+            $new_password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+
+            // Perintah ke Model untuk update database
+            $this->User_model->update_password($email, $new_password);
+
+            // Hapus session sementara (biar bersih)
+            $this->session->unset_userdata('reset_email');
+
+            // Set pop-up sukses dan tendang ke halaman login
+            $this->session->set_flashdata('success_reset', TRUE);
+            redirect('auth/login');
         }
     }
 }

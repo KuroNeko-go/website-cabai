@@ -31,7 +31,8 @@ class Transaksi_model extends CI_Model {
         foreach ($cart as $item) {
             $detail = [
                 'transaksi_id' => $transaksi_id,
-                'bibit_id' => $item['id'],
+                'product_id' => $item['id'],          
+                'tipe_produk' => $item['tipe'],       
                 'nama_produk' => $item['name'],
                 'harga' => $item['price'],
                 'qty' => $item['qty'],
