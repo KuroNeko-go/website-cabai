@@ -6,7 +6,8 @@
     <title>Login Admin - CabaiNusa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css'); ?>">
+
     <!-- Panggilan CSS Eksternal -->
     <link rel="stylesheet" href="<?= base_url('assets/dist/css/style.css?v=') . time(); ?>">
 </head>
@@ -87,6 +88,21 @@
                 this.classList.toggle('fa-eye-slash');
             });
         }
+    </script>
+
+    <script src="<?php echo base_url('assets/plugins/sweetalert2/sweetalert2.all.min.js'); ?>"></script>
+
+    <script>
+        <?php if($this->session->flashdata('success_reset')): ?>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Password Anda berhasil diganti. Silakan login menggunakan password baru.',
+                icon: 'success',
+                confirmButtonText: 'OK, Paham',
+                confirmButtonColor: '#2d7a24',
+                allowOutsideClick: false
+            });
+        <?php endif; ?>
     </script>
 </body>
 </html>

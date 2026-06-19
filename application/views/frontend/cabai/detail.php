@@ -183,7 +183,7 @@
 </div>
 
 <script>
-// Logic Tambah/Kurang Jumlah Visual Saja (Tanpa Batas Maksimal Stok)
+// Logic Tambah/Kurang Jumlah
 const qtyInput = document.getElementById('qtyInput');
 const qtyMinus = document.getElementById('qtyMinus');
 const qtyPlus = document.getElementById('qtyPlus');
@@ -200,12 +200,34 @@ qtyPlus.addEventListener('click', function() {
     qtyInput.value = currentVal + 1;
 });
 
-// Dummy function biar tombol keranjang gak error saat dipencet
+// LOGIC KERANJANG BENERAN (BUKAN DUMMY LAGI)
 document.getElementById('addToCartBtn').addEventListener('click', function() {
-    alert("Fitur keranjang sedang dalam tahap pengembangan! Sabar ya, bos! 🛠️");
+    let jumlah_qty = parseInt(qtyInput.value);
+    
+    // Tembak pake AJAX (jQuery) ke controller Cart
+    $.ajax({
+        url: '<?= base_url('cart/add') ?>',
+        type: 'POST',
+        data: {
+            id: <?= $cabai['id'] ?>,      // Ambil ID cabai dari database
+            qty: jumlah_qty,              // Ambil jumlah pesanan dari input
+            tipe: 'cabai'                 // <--- STEMPEL TIPE CABAI MASUK KE SINI
+        },
+        dataType: 'json',
+        success: function(response) {
+            if(response.status === 'success') {
+                alert(response.message); // Kalo lu mau SweetAlert, ganti alert ini pake Swal.fire
+            } else {
+                alert('Gagal: ' + response.message);
+            }
+        },
+        error: function() {
+            alert('Terjadi kesalahan jaringan.');
+        }
+    });
 });
 
 document.getElementById('buyNowBtn').addEventListener('click', function() {
-    alert("Sistem checkout masih dirakit. Nyusul ya! 🚀");
+    alert("Sistem checkout langsung masih dirakit. Gunakan 'Tambah ke Keranjang' dulu ya! 🚀");
 });
 </script>
