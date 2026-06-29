@@ -22,10 +22,14 @@
                         elseif (isset($b['nama']))            $nama_produk = $b['nama'];
                         else                                  $nama_produk = 'Bibit Unggul Duaputra';
                     ?>
-                    
+
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         
-                        <div class="card h-100 card<?= ($index % 10) + 1 ?>">
+                        <div class="card h-100 card<?= ($index % 10) + 1 ?> <?= (isset($b['stok']) && $b['stok'] <= 0) ? 'card-habis' : '' ?>" style="position: relative;">
+
+                            <?php if(isset($b['stok']) && $b['stok'] <= 0): ?>
+                                <div class="overlay-habis">STOK HABIS</div>
+                            <?php endif; ?>
 
                             <div class="card-badge">Varietas Unggul</div>
                             <div class="card-wishlist">♥</div>

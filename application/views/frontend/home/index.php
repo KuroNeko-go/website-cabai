@@ -5,8 +5,8 @@
             <h1>Bibit Unggul <span>Panen Maksimal</span></h1>
             <p>Selamat datang di Duaputra. Kami menyediakan berbagai macam benih dan bibit tanaman berkualitas tinggi, unggul, dan siap tanam untuk mendukung produktivitas pertanian Anda.</p>
             <div class="flex-buttons">
-                <a href="<?= base_url('bibit') ?>" class="btn btn-primary"><i class="fas fa-shopping-bag"></i> Lihat Bibit</a>
-                <a href="<?= base_url('cabai') ?>" class="btn btn-outline"><i class="fas fa-pepper-hot"></i> Lihat Cabai</a>
+                <a href="<?= base_url('bibit') ?>" class="btn btn-outline btn-animasi"><i class="fas fa-shopping-bag"></i> Lihat Bibit</a>
+                <a href="<?= base_url('cabai') ?>" class="btn btn-outline btn-animasi"><i class="fas fa-pepper-hot"></i> Lihat Cabai</a>
             </div>
         </div>
         <div class="hero-image-kustom">
@@ -67,7 +67,7 @@
                 <div class="about-stat-item"><div class="n">5+</div><div class="about-stat-label">Tahun Pengalaman</div></div>
                 <div class="about-stat-item"><div class="n">20+</div><div class="about-stat-label">Varietas Bibit</div></div>
             </div>
-            <a href="<?= base_url('bibit') ?>" class="btn btn-primary" style="margin-top: 1rem !important;">Jelajahi Produk Kami</a>
+            <a href="<?= base_url('bibit') ?>" class="btn btn-outline btn-animasi" style="margin-top: 1rem !important;">Jelajahi Produk Kami</a>
         </div>
     </div>
 </section>
@@ -78,8 +78,8 @@
         <h2>Siap Meningkatkan Hasil Panen Anda?</h2>
         <p>Jangan pertaruhkan masa depan pertanian Anda dengan bibit sembarangan. Dapatkan produk unggulan dari Duaputra sekarang juga!</p>
         <div class="cta-button-container">
-            <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-primary cta-button-whatsapp"><i class="fab fa-whatsapp"></i> Hubungi via WhatsApp</a>
-            <a href="<?= base_url('bibit') ?>" class="btn btn-outline cta-button-shop"><i class="fas fa-shopping-cart"></i> Belanja Online</a>
+            <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-outline cta-button-whatsapp btn-animasi"><i class="fab fa-whatsapp"></i> Hubungi via WhatsApp</a>
+            <a href="<?= base_url('bibit') ?>" class="btn btn-outline cta-button-shop btn-animasi"><i class="fas fa-shopping-cart"></i> Belanja Online</a>
         </div>
     </div>
 </section>

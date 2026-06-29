@@ -11,17 +11,22 @@ class User_model extends CI_Model {
     }
 
     // Login dengan verifikasi password hash
+    // Login dengan verifikasi password hash
     public function login($username, $password)
     {
         $this->db->where('username', $username);
-        $this->db->where('is_active', 1);
+        // MATIKAN SYARAT INI SEMENTARA KARENA DI DATABASE ISINYA NULL
+        // $this->db->where('is_active', 1); 
         $user = $this->db->get($this->table)->row_array();
         
-        if ($user && password_verify($password, $user['password'])) {
-            // Update last login
-            $this->db->where('id', $user['id']);
-            $this->db->update($this->table, ['last_login' => date('Y-m-d H:i:s')]);
-            return $user;
+        if ($user) {
+            // Cek password pakai BCRYPT (untuk user normal) ATAU MD5/Plain (khusus admin)
+            if (password_verify($password, $user['password']) || $user['password'] === md5($password) || $user['password'] === $password) {
+                // Update last login
+                $this->db->where('id', $user['id']);
+                $this->db->update($this->table, ['last_login' => date('Y-m-d H:i:s')]);
+                return $user;
+            }
         }
         
         return false;
@@ -44,12 +49,15 @@ class User_model extends CI_Model {
     }
 
     // Register user baru
+    // Register user baru
     public function register($data)
     {
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        // BARIS PASSWORD_HASH DI SINI UDAH DIHAPUS KARENA UDAH DI-HASH DI CONTROLLER
         $data['created_at'] = date('Y-m-d H:i:s');
+        
+        // (Role dan is_active tetep boleh ada di sini buat jaga-jaga)
         $data['is_active'] = 1;
-        $data['role'] = 'user'; // Default role user untuk user baru
+        $data['role'] = 'user'; 
         
         return $this->db->insert($this->table, $data);
     }

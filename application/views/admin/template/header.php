@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/dist/css/style.css?v=') . time(); ?>">
     
     <style>
         * {
@@ -221,10 +222,14 @@
         <a href="<?= base_url('admin_transaksi') ?>" class="menu-item <?= $this->uri->segment(1) == 'admin_transaksi' ? 'active' : '' ?>">
             <i class="fas fa-shopping-cart"></i> Transaksi
         </a>
+        <a href="<?= base_url('admin_user') ?>" class="menu-item <?= $this->uri->segment(1) == 'admin_user' ? 'active' : '' ?>">
+            <i class="fas fa-users"></i> Kelola User
+        </a>
         <div class="menu-divider"></div>
-        <a href="<?= base_url('auth/logout') ?>" class="menu-item" onclick="return confirm('Yakin ingin logout?')">
+        <a href="<?= base_url('auth/logout') ?>" id="tombolLogout" class="menu-item">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
+        
     </div>
 </div>
 

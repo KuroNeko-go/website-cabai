@@ -69,26 +69,35 @@ class Transaksi_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update($this->table, [
             'status' => $status,
-            'updated_at' => date('Y-m-d H:i:s')
+            
         ]);
     }
 
     // Get statistics
+    // Get statistics
     public function get_statistics()
     {
+        // 1. Total Pendapatan All-Time (Hanya hitung yang statusnya LUNAS / 'paid')
         $this->db->select_sum('grand_total');
-        $this->db->where('status !=', 'cancelled');
+        $this->db->where('status', 'paid'); 
         $total_pendapatan = $this->db->get($this->table)->row_array()['grand_total'] ?? 0;
         
+        // 2. Total Pendapatan KHUSUS HARI INI
+        $this->db->select_sum('grand_total');
+        $this->db->where('status', 'paid');
+        $this->db->where('DATE(created_at)', date('Y-m-d')); // Cek tanggal hari ini aja
+        $pendapatan_hari_ini = $this->db->get($this->table)->row_array()['grand_total'] ?? 0;
+        
         $total_transaksi = $this->db->count_all($this->table);
-        $pending = $this->db->where('status', 'pending')->count_all_results($this->table);
-        $completed = $this->db->where('status', 'completed')->count_all_results($this->table);
+        $pending = $this->db->where('status', 'Pending')->count_all_results($this->table);
+        $paid = $this->db->where('status', 'paid')->count_all_results($this->table);
         
         return [
             'total_pendapatan' => $total_pendapatan,
+            'pendapatan_hari_ini' => $pendapatan_hari_ini, // <--- Data baru yang kita suntik
             'total_transaksi' => $total_transaksi,
             'pending' => $pending,
-            'completed' => $completed
+            'paid' => $paid
         ];
     }
 
@@ -98,6 +107,39 @@ class Transaksi_model extends CI_Model {
         $this->db->order_by('id', 'DESC');
         $this->db->limit($limit);
         return $this->db->get($this->table)->result_array();
+    }
+
+    public function get_detail_pesanan($id_transaksi)
+    {
+        // Narik data dari tabel transaksi_detail berdasarkan ID Transaksi
+        $this->db->where('transaksi_id', $id_transaksi);
+        return $this->db->get('transaksi_detail')->result_array();
+    }
+
+    // Fungsi untuk narik data grafik 7 hari terakhir
+    public function get_grafik_pendapatan()
+    {
+        $this->db->select('DATE(created_at) as tanggal, SUM(grand_total) as pendapatan');
+        $this->db->where('status', 'paid');
+        // Filter cuma ambil 7 hari ke belakang
+        $this->db->where('created_at >=', date('Y-m-d', strtotime('-7 days')));
+        $this->db->group_by('DATE(created_at)');
+        $this->db->order_by('DATE(created_at)', 'ASC');
+        
+        return $this->db->get($this->table)->result_array();
+    }
+
+    // Fungsi untuk nyari 5 produk paling laris (Gabungan Bibit & Cabai)
+    public function get_produk_terlaris()
+    {
+        $this->db->select('transaksi_detail.nama_produk, transaksi_detail.tipe_produk, SUM(transaksi_detail.qty) as total_terjual');
+        $this->db->from('transaksi_detail');
+        $this->db->join('transaksi', 'transaksi.id = transaksi_detail.transaksi_id');
+        $this->db->where('transaksi.status', 'paid');
+        $this->db->group_by('transaksi_detail.nama_produk, transaksi_detail.tipe_produk');
+        $this->db->order_by('total_terjual', 'DESC');
+        
+        return $this->db->get()->result_array();
     }
 }
 ?>

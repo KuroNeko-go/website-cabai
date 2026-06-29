@@ -75,10 +75,10 @@
             
             <!-- Action Buttons -->
             <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-                <button id="addToCartBtn" class="btn-primary" style="padding: 14px 32px; font-size: 16px; cursor: pointer; border: none;">
+                <button id="addToCartBtn" class="btn-outline btn-animasi" style="padding: 14px 32px; font-size: 16px; cursor: pointer; background: transparent; border: 2px solid #2d7a24; color: #2d7a24; border-radius: 40px; font-weight: 600;">
                     <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
                 </button>
-                <button id="buyNowBtn" class="btn-outline" style="padding: 14px 32px; font-size: 16px; cursor: pointer; background: transparent; border: 2px solid #2d7a24; color: #2d7a24; border-radius: 40px; font-weight: 600;">
+                <button id="buyNowBtn" class="btn-outline btn-animasi" style="padding: 14px 32px; font-size: 16px; cursor: pointer; background: transparent; border: 2px solid #2d7a24; color: #2d7a24; border-radius: 40px; font-weight: 600;">
                     <i class="fas fa-bolt"></i> Beli Sekarang
                 </button>
             </div>
@@ -144,6 +144,10 @@
                     <span style="font-weight: 600;">Cocok Ditanam</span>
                     <span><?= $cabai['cocok_ditanam'] ?></span>
                 </div>
+                <div style="background: #e2e8f0; color: #475569; padding: 8px 16px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+                    <i class="fas fa-box"></i>
+                    <strong>Stok Tersedia:</strong> <?= $cabai['stok'] ?>
+                </div>
             </div>
         </div>
     </div>
@@ -182,52 +186,201 @@
     <?php endif; ?>
 </div>
 
+<script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.all.min.js') ?>"></script>
+
 <script>
-// Logic Tambah/Kurang Jumlah
+    
 const qtyInput = document.getElementById('qtyInput');
 const qtyMinus = document.getElementById('qtyMinus');
 const qtyPlus = document.getElementById('qtyPlus');
 
+// Kita set batas manual biar orang ga order sejuta ton dan bikin error
+const maxStock = 99; 
+
+function updateTombolStatus() {
+    let currentVal = parseInt(qtyInput.value);
+
+    // 1. Logika Tombol Plus
+    if (currentVal >= maxStock) {
+        qtyPlus.disabled = true; 
+        qtyPlus.style.opacity = '0.4'; 
+        qtyPlus.style.cursor = 'not-allowed'; 
+    } else {
+        qtyPlus.disabled = false;
+        qtyPlus.style.opacity = '1';
+        qtyPlus.style.cursor = 'pointer';
+    }
+
+    // 2. Logika Tombol Minus (Biar ga turun di bawah 1)
+    if (currentVal <= 1) {
+        qtyMinus.disabled = true;
+        qtyMinus.style.opacity = '0.4';
+        qtyMinus.style.cursor = 'not-allowed';
+    } else {
+        qtyMinus.disabled = false;
+        qtyMinus.style.opacity = '1';
+        qtyMinus.style.cursor = 'pointer';
+    }
+}
+
+// Panggil pas awal halaman diload
+updateTombolStatus();
+
 qtyMinus.addEventListener('click', function() {
     let currentVal = parseInt(qtyInput.value);
-    if (currentVal > 1) {
-        qtyInput.value = currentVal - 1;
+    if (currentVal > 1) { 
+        qtyInput.value = currentVal - 1; 
+        updateTombolStatus(); 
     }
 });
 
 qtyPlus.addEventListener('click', function() {
     let currentVal = parseInt(qtyInput.value);
-    qtyInput.value = currentVal + 1;
+    if (currentVal < maxStock) { 
+        qtyInput.value = currentVal + 1;
+        updateTombolStatus(); 
+    }
 });
 
-// LOGIC KERANJANG BENERAN (BUKAN DUMMY LAGI)
+// Biar kalau user ngetik manual di kolomnya aman
+qtyInput.addEventListener('change', function() {
+    let val = parseInt(this.value);
+    if (isNaN(val) || val < 1) {
+        this.value = 1;
+    } else if (val > maxStock) {
+        this.value = maxStock;
+    }
+    updateTombolStatus();
+});
+
+// FUNGSI 1: TAMBAH KERANJANG (AJAX)
 document.getElementById('addToCartBtn').addEventListener('click', function() {
-    let jumlah_qty = parseInt(qtyInput.value);
-    
-    // Tembak pake AJAX (jQuery) ke controller Cart
-    $.ajax({
-        url: '<?= base_url('cart/add') ?>',
-        type: 'POST',
-        data: {
-            id: <?= $cabai['id'] ?>,      // Ambil ID cabai dari database
-            qty: jumlah_qty,              // Ambil jumlah pesanan dari input
-            tipe: 'cabai'                 // <--- STEMPEL TIPE CABAI MASUK KE SINI
-        },
-        dataType: 'json',
-        success: function(response) {
-            if(response.status === 'success') {
-                alert(response.message); // Kalo lu mau SweetAlert, ganti alert ini pake Swal.fire
-            } else {
-                alert('Gagal: ' + response.message);
+    // --- SATPAM LOGIN ---
+    <?php if (!$this->session->userdata('id_user')) : ?>
+        Swal.fire({
+            title: 'Tunggu Dulu!',
+            text: 'Anda harus login untuk bisa memasukkan barang ke keranjang.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#2d6a4f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Login Sekarang',
+            cancelButtonText: 'Nanti Aja'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "<?= base_url('auth/login') ?>";
             }
-        },
-        error: function() {
-            alert('Terjadi kesalahan jaringan.');
+        });
+        return; // Hentikan proses
+    <?php endif; ?>
+    // --------------------
+
+    let originalText = this.innerHTML;
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+    
+    fetch('<?= base_url('cart/add') ?>', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            'id': '<?= $cabai['id'] ?>',
+            'qty': parseInt(qtyInput.value),
+            'tipe': 'cabai'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === 'success') {
+            swal.fire({
+                title: 'sukses',
+                text: data.message +' Mau Cek Keranjang Dulu Atau Liat Produk Lainnya?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#2d6a4f',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Cek Keranjang',
+                cancelButtonText: 'Lihat Produk Lain',
+                background: '#1e293b',
+                color: '#f8fafc',
+                }).then((result) => {
+                    if (result.isConfirmed) { window.location.href = "<?= base_url('cart') ?>"; }
+                });
+        } else {
+            swal.fire({
+                title: 'Gagal Memasukkan ke Keranjang',
+                text: data.message,
+                icon: 'error',
+                confirmButtonColor: '#D33',
+                background: '#1e293b',
+                color: '#f8fafc',
+            });
         }
-    });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan sistem atau jaringan.');
+    })
+    .finally(() => { this.innerHTML = originalText; });
 });
 
-document.getElementById('buyNowBtn').addEventListener('click', function() {
-    alert("Sistem checkout langsung masih dirakit. Gunakan 'Tambah ke Keranjang' dulu ya! 🚀");
+// FUNGSI 2: BELI SEKARANG (FORM GAIB)
+document.getElementById('buyNowBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // Wajib ada biar tombol gak ngelakuin aksi bawaan
+
+    // --- SATPAM LOGIN ---
+    <?php if (!$this->session->userdata('id_user')) : ?>
+        Swal.fire({
+            title: 'Mau Langsung Beli?',
+            text: 'Login dulu yuk biar kami tahu mau dikirim ke mana cabainya.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#2d6a4f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Gas Login',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "<?= base_url('auth/login') ?>";
+            }
+        });
+        return; // Hentikan proses
+    <?php endif; ?>
+    // --------------------
+
+    let originalText = this.innerHTML;
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengalihkan...';
+    
+    // BIKIN FORM GAIB
+    let form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '<?= base_url('cart/set_langsung') ?>'; 
+    
+    let idInput = document.createElement('input');
+    idInput.type = 'hidden';
+    idInput.name = 'id';
+    idInput.value = '<?= $cabai['id'] ?>'; // CATATAN: Kalau ini halaman bibit, ganti jadi $bibit['id']
+    
+    // TRIK AMAN NGAMBIL QTY: Cek id 'qtyInput' atau 'qty'
+    let inputAngka = document.getElementById('qtyInput') || document.getElementById('qty');
+    let nilaiQty = inputAngka ? inputAngka.value : 1;
+
+    let qtyInputHidden = document.createElement('input');
+    qtyInputHidden.type = 'hidden';
+    qtyInputHidden.name = 'qty';
+    qtyInputHidden.value = nilaiQty;
+
+    let tipeInput = document.createElement('input');
+    tipeInput.type = 'hidden';
+    tipeInput.name = 'tipe';
+    tipeInput.value = 'cabai'; // CATATAN: Kalau ini halaman bibit, ganti jadi 'bibit'
+    
+    // Gabungin dan Terbangkan!
+    form.appendChild(idInput);
+    form.appendChild(qtyInputHidden);
+    form.appendChild(tipeInput);
+    document.body.appendChild(form);
+    form.submit();
+    
+    setTimeout(() => { this.innerHTML = originalText; }, 1000);
 });
 </script>

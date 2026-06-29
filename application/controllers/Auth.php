@@ -13,20 +13,19 @@ class Auth extends CI_Controller {
     // Halaman Login
     public function login()
     {
-        // Jika sudah login, redirect ke dashboard
+        // Jika sudah login, redirect sesuai rolenya biar gak nyasar
         if ($this->session->userdata('logged_in')) {
-            redirect('dashboard');
+            if ($this->session->userdata('role') == 'admin' || $this->session->userdata('role') == 'staff') {
+                redirect('dashboard');
+            } else {
+                redirect('home');
+            }
         }
 
         $data['title'] = 'Login Admin - CabaiNusa';
         $this->load->view('admin/auth/login', $data);
     }
 
-    public function register()
-    {
-        $data['title'] = 'Register Akun - CabaiNusa';
-        $this->load->view('admin/auth/register', $data); // Pastikan path-nya sesuai lokasi file lu
-    }
 
     // Proses Login
     // --- PERBAIKAN FUNGSI LOGIN ---
@@ -46,9 +45,9 @@ class Auth extends CI_Controller {
             if ($user) {
                 $session_data = [
                     'logged_in' => TRUE,
-                    'user_id' => $user['id'],
-                    'username' => $user['username'],
-                    'role' => $user['role']
+                    'id_user'   => $user['id'], // <--- INI KUNCI BIAR NAVBAR BERUBAH
+                    'username'  => $user['username'],
+                    'role'      => $user['role']
                 ];
                 $this->session->set_userdata($session_data);
                 
@@ -63,6 +62,17 @@ class Auth extends CI_Controller {
                 redirect('auth/login');
             }
         }
+    }
+
+    public function register()
+    {
+        // Cegah orang yg udah login buka halaman daftar
+        if ($this->session->userdata('logged_in')) {
+            redirect('home');
+        }
+
+        $data['title'] = 'Register Akun - CabaiNusa';
+        $this->load->view('admin/auth/register', $data); 
     }
 
     // --- PERBAIKAN FUNGSI REGISTER ---

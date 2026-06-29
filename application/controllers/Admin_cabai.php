@@ -40,6 +40,7 @@ class Admin_cabai extends CI_Controller {
         $this->form_validation->set_rules('nama_varietas', 'Nama Varietas', 'required');
         $this->form_validation->set_rules('tingkat_pedas', 'Tingkat Pedas', 'required');
         $this->form_validation->set_rules('umur_panen', 'Umur Panen', 'required|numeric');
+        $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
         
         if ($this->form_validation->run() == FALSE) {
             $this->create();
@@ -50,6 +51,7 @@ class Admin_cabai extends CI_Controller {
                 'tingkat_pedas' => $this->input->post('tingkat_pedas'),
                 'skala_pedas' => $this->input->post('skala_pedas'),
                 'umur_panen' => $this->input->post('umur_panen'),
+                'stok' => $this->input->post('stok'),
                 'cocok_ditanam' => $this->input->post('cocok_ditanam'),
                 'keunggulan' => $this->input->post('keunggulan'),
                 'deskripsi' => $this->input->post('deskripsi'),
@@ -126,6 +128,7 @@ class Admin_cabai extends CI_Controller {
                 'tingkat_pedas' => $this->input->post('tingkat_pedas'),
                 'skala_pedas' => $this->input->post('skala_pedas'),
                 'umur_panen' => $this->input->post('umur_panen'),
+                'stok' => $this->input->post('stok'),
                 'cocok_ditanam' => $this->input->post('cocok_ditanam'),
                 'keunggulan' => $this->input->post('keunggulan'),
                 'deskripsi' => $this->input->post('deskripsi'),

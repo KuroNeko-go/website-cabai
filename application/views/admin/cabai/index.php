@@ -14,6 +14,7 @@
                     <th>Nama Latin</th>
                     <th>Tingkat Pedas</th>
                     <th>Umur Panen</th>
+                    <th>Stok</th>
                     <th>Jumlah Bibit</th>
                     <th>Aksi</th>
                 </tr>
@@ -43,6 +44,17 @@
                         <span class="badge <?= $pedas_class ?>"><?= $cabai['tingkat_pedas'] ?></span>
                     </td>
                     <td><?= $cabai['umur_panen'] ?> HST</td>
+                    <td class="align-middle">
+                        <?php if($cabai['stok'] > 0): ?>
+                            <span class="badge" style="background-color: #d1fae5; color: #059669; border-radius: 10px; padding: 6px 12px;">
+                                <?= $cabai['stok'] ?> Tersisa
+                            </span>
+                        <?php else: ?>
+                            <span class="badge" style="background-color: #fee2e2; color: #dc2626; border-radius: 10px; padding: 6px 12px;">
+                                Habis
+                            </span>
+                        <?php endif; ?>
+                    </td>
                     <td><span class="badge badge-success"><?= $cabai['total_bibit'] ?? 0 ?> Bibit</span></td>
                     <td>
                         <a href="<?= base_url('admin_cabai/edit/' . $cabai['id']) ?>" class="btn btn-sm btn-primary" style="padding: 5px 10px; margin-right: 5px;">

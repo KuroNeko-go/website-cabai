@@ -2519,3 +2519,929 @@ body.auth-page {
 .back-link a:hover {
     text-decoration: underline;
 }
+
+/* ========================================================
+   STYLING HALAMAN CHECKOUT MINIMALIS (CLEAN THEME)
+   ======================================================== */
+.checkout-wrapper {
+    background-color: #f7f7f7;
+    padding: 60px 0;
+    min-height: 100vh;
+}
+
+.checkout-card {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ebebeb;
+}
+
+.checkout-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 25px;
+    border-bottom: none;
+}
+
+.form-minimalist {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background: #f8f9fa;
+    color: #333;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.form-minimalist:focus {
+    background: #fff;
+    border-color: #2d7a24;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(45, 122, 36, 0.1);
+}
+
+.form-label-minimalist {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.summary-box {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 30px;
+    border: 1px solid #ebebeb;
+    position: sticky;
+    top: 120px;
+}
+
+.summary-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-item-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.summary-item-meta {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.summary-item-price {
+    font-weight: 600;
+    color: #222;
+}
+
+/* Paksa override .duaputra-body .btn yang pakai !important */
+.btn-checkout-dark,
+.duaputra-body .btn-checkout-dark,
+button.btn-checkout-dark {
+    display: block !important;
+    background: #333333 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 15px 20px !important;
+    width: 100% !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+    margin-top: 20px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    line-height: normal !important;
+    gap: 0 !important;
+}
+
+.btn-checkout-dark:hover,
+.duaputra-body .btn-checkout-dark:hover,
+button.btn-checkout-dark:hover {
+    background: #111111 !important;
+    color: #ffffff !important;
+    transform: none !important;
+}
+
+/* Dark mode untuk checkout */
+body.dark-mode .checkout-wrapper {
+    background-color: #141719 !important;
+}
+
+body.dark-mode .checkout-card {
+    background: #2d3339 !important;
+    border-color: #4b545c !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark-mode .checkout-card h3 {
+    color: #ffffff !important;
+}
+
+body.dark-mode .form-minimalist {
+    background: #1e2428 !important;
+    border-color: #4b545c !important;
+    color: #d2d6de !important;
+}
+
+body.dark-mode .form-minimalist:focus {
+    background: #22282d !important;
+    border-color: #52b788 !important;
+    box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15) !important;
+}
+
+body.dark-mode .form-minimalist::placeholder {
+    color: #6c757d !important;
+}
+
+body.dark-mode .form-label-minimalist {
+    color: #adb5bd !important;
+}
+
+body.dark-mode .summary-box {
+    background: #2d3339 !important;
+    border-color: #4b545c !important;
+}
+
+body.dark-mode .summary-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .summary-item {
+    border-bottom-color: #3d4449 !important;
+}
+
+body.dark-mode .summary-item-name {
+    color: #d2d6de !important;
+}
+
+body.dark-mode .summary-item-meta {
+    color: #868e96 !important;
+}
+
+body.dark-mode .summary-item-price {
+    color: #ffffff !important;
+}
+
+body.dark-mode .btn-checkout-dark,
+body.dark-mode .duaputra-body .btn-checkout-dark,
+body.dark-mode button.btn-checkout-dark {
+    background: #52b788 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .btn-checkout-dark:hover,
+body.dark-mode .duaputra-body .btn-checkout-dark:hover {
+    background: #40916c !important;
+    color: #ffffff !important;
+}
+
+/* ========================================================
+   STYLING HALAMAN KERANJANG MODERN
+   ======================================================== */
+.cart-card {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.cart-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    border-color: #2d7a24;
+}
+
+.cart-img-box {
+    width: 100px;
+    height: 100px;
+    background: #f8faf7;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+    flex-shrink: 0;
+}
+
+.cart-info {
+    flex: 1;
+}
+
+.qty-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e2e8f0;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.qty-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 16px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #2d7a24;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: #e8f5e9;
+}
+
+.qty-input {
+    width: 45px;
+    text-align: center;
+    border: none;
+    font-weight: 700;
+    color: #1a2e1a;
+    pointer-events: none;
+}
+
+.btn-trash {
+    background: white;
+    border: 2px solid #ffeeba;
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: #dc3545;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-trash:hover {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.summary-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    position: sticky;
+    top: 120px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* ========================================================
+   ADAPTASI DARK MODE (BIAR GAK NABRAK)
+   ======================================================== */
+body.dark-mode .cart-card,
+body.dark-mode .summary-card {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .cart-card h4,
+body.dark-mode .summary-card h5,
+body.dark-mode .summary-card span {
+    color: #ffffff !important;
+}
+
+body.dark-mode .cart-img-box {
+    background: #1a1a1a;
+}
+
+body.dark-mode .qty-control,
+body.dark-mode .qty-input {
+    background: #2a2a2a;
+    color: #fff;
+    border-color: #555;
+}
+
+body.dark-mode .btn-trash {
+    background: #2a2a2a;
+    border-color: #555;
+}
+
+body.dark-mode .qty-btn:hover {
+    background: #444;
+}
+
+/* ========================================================
+   FIX CHROME AUTOFILL BUG (Biar teks gak jadi putih/hilang)
+   ======================================================== */
+/* Untuk Light Mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #f8f9fa inset !important;
+    -webkit-text-fill-color: #333333 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Untuk Dark Mode */
+body.dark-mode input:-webkit-autofill,
+body.dark-mode input:-webkit-autofill:hover,
+body.dark-mode input:-webkit-autofill:focus,
+body.dark-mode textarea:-webkit-autofill,
+body.dark-mode textarea:-webkit-autofill:hover,
+body.dark-mode textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #2a2a2a inset !important;
+    /* Samain sama warna background input dark mode */
+    -webkit-text-fill-color: #ffffff !important;
+    /* Paksa teks jadi putih */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ========================================================
+   FIX LAYOUT & WARNA DARK MODE CHECKOUT
+   ======================================================== */
+.cart-img-placeholder {
+    width: 50px;
+    height: 50px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.summary-calc .calc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.summary-divider {
+    border-top: 2px solid #e2e8f0;
+    margin: 20px 0;
+}
+
+.calc-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: #222;
+    font-size: 1.1rem;
+}
+
+.calc-total-row span:last-child {
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+.secure-badge {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: #888;
+    font-weight: 600;
+}
+
+/* --- PAKSAAN WARNA UNTUK DARK MODE --- */
+body.dark-mode .cart-img-placeholder {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+body.dark-mode .summary-item-name,
+body.dark-mode .summary-item-price {
+    color: #ffffff !important;
+    /* Paksa putih biar kelihatan */
+}
+
+body.dark-mode .summary-calc .calc-row {
+    color: #bbbbbb;
+}
+
+body.dark-mode .calc-total-row {
+    color: #ffffff;
+}
+
+body.dark-mode .summary-divider {
+    border-top-color: #444444;
+}
+
+body.dark-mode .secure-badge {
+    color: #bbbbbb;
+}
+
+/* ========================================================
+   ORDER SUMMARY CHECKOUT (STRICT VERTICAL LAYOUT)
+   ======================================================== */
+.checkout-summary-container {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 30px;
+    border: 1px solid #ebebeb;
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    /* KUNCI UTAMA BIAR ELEMEN WAJIB TURUN KE BAWAH */
+    gap: 25px;
+    /* Jarak antar bagian (Judul, Produk, Hitungan, Tombol) */
+}
+
+.checkout-summary-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.checkout-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.checkout-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.checkout-item-left {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.checkout-qty-box {
+    width: 45px;
+    height: 45px;
+    background: #666;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.checkout-item-name {
+    font-weight: 600;
+    color: #222;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.checkout-item-meta {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.checkout-item-price {
+    font-weight: 600;
+    color: #222;
+}
+
+.checkout-calc-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checkout-calc-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.checkout-divider {
+    height: 1px;
+    background: #ebebeb;
+    margin: 10px 0;
+    border: none;
+}
+
+.checkout-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    color: #222;
+    font-size: 1.1rem;
+}
+
+.checkout-total-price {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: #222;
+}
+
+.btn-pay-now {
+    background: #222222 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    display: block !important;
+    transition: background 0.3s !important;
+}
+
+.btn-pay-now:hover {
+    background: #000000 !important;
+}
+
+.checkout-secure-badge {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #888;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+/* ========================================================
+   DARK MODE ADAPTATION UNTUK CHECKOUT KANAN
+   ======================================================== */
+body.dark-mode .checkout-summary-container {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .checkout-summary-title,
+body.dark-mode .checkout-item-name,
+body.dark-mode .checkout-item-price,
+body.dark-mode .checkout-total-row,
+body.dark-mode .checkout-total-price {
+    color: #fff;
+}
+
+body.dark-mode .checkout-item-row {
+    border-bottom-color: #444;
+}
+
+body.dark-mode .checkout-qty-box {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+body.dark-mode .checkout-item-meta,
+body.dark-mode .checkout-calc-row,
+body.dark-mode .checkout-secure-badge {
+    color: #bbb;
+}
+
+body.dark-mode .checkout-divider {
+    background: #444;
+}
+
+body.dark-mode .btn-pay-now {
+    background: #444444 !important;
+}
+
+body.dark-mode .btn-pay-now:hover {
+    background: #555555 !important;
+}
+
+/* ============================================================
+   BUTTON CHECKOUT — NUCLEAR OVERRIDE
+   Pakai all:unset untuk reset semua style bawaan browser/framework
+   ============================================================ */
+button.btn-pay-now,
+button.btn-checkout-dark {
+    all: unset;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    transition: background 0.2s ease !important;
+}
+
+button.btn-pay-now {
+    background: #222222 !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+    padding: 16px 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 15px !important;
+}
+
+button.btn-pay-now:hover {
+    background: #000000 !important;
+}
+
+button.btn-checkout-dark {
+    background: #333333 !important;
+    color: #ffffff !important;
+    border-radius: 4px !important;
+    padding: 15px 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    margin-top: 0 !important;
+}
+
+button.btn-checkout-dark:hover {
+    background: #111111 !important;
+}
+
+body.dark-mode button.btn-pay-now,
+body.dark-mode button.btn-checkout-dark {
+    background: #52b788 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode button.btn-pay-now:hover,
+body.dark-mode button.btn-checkout-dark:hover {
+    background: #40916c !important;
+}
+
+.btn-animasi {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.btn-animasi::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #40916c;
+    transform: skewX(-30deg);
+    transition: all 0.5s ease;
+    z-index: -1;
+}
+
+.btn-animasi:hover::before {
+    left: 100%;
+}
+
+/* =========================================
+   FORM CABAI & BIBIT (ADMIN DASHBOARD)
+   ========================================= */
+.auth-style-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    border: none;
+    margin-bottom: 30px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--bg-ikon);
+    color: var(--warna-tema);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.auth-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.auth-header p {
+    color: #64748b;
+    font-size: 15px;
+    margin: 0;
+}
+
+.form-label-custom {
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: block;
+}
+
+.input-icon-wrap {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon-wrap .form-control {
+    height: 50px;
+    padding-left: 45px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.input-icon-wrap textarea.form-control {
+    height: auto;
+    padding-top: 14px;
+}
+
+.input-icon-wrap .form-control:focus {
+    background: #fff;
+    border-color: var(--warna-tema);
+    box-shadow: 0 0 0 4px var(--shadow-tema);
+}
+
+.input-icon-wrap i.icon-prefix {
+    position: absolute;
+    left: 16px;
+    top: 17px;
+    color: #94a3b8;
+    font-size: 16px;
+    transition: 0.3s;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.input-icon-wrap .form-control:focus+i.icon-prefix {
+    color: var(--warna-tema);
+}
+
+.upload-area {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.upload-area:hover {
+    border-color: var(--warna-tema);
+    background: var(--bg-ikon);
+}
+
+.btn-submit-auth {
+    background: var(--warna-tema);
+    color: white;
+    height: 50px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px var(--shadow-tema);
+    border: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-submit-auth:hover {
+    background: var(--hover-tema);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.btn-back-auth {
+    background: #f1f5f9;
+    color: #475569;
+    height: 50px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    border: 1px solid #e2e8f0;
+    text-decoration: none;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn-back-auth:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.checkbox-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+    color: #475569;
+    margin: 0;
+}
+
+.checkbox-item:hover {
+    border-color: var(--warna-tema);
+    background: var(--bg-ikon);
+    color: var(--warna-tema);
+}
+
+.checkbox-item input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--warna-tema);
+    cursor: pointer;
+}
+
+.card-habis {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+    filter: grayscale(80%);
+}
+
+.overlay-habis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -59%);
+    background: rgba(220, 53, 69, 0.9);
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-weight: 700;
+    z-index: 10;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
