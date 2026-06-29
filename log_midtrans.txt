@@ -1125,3 +1125,78 @@ Array
     [currency] => IDR
 )
 
+Array
+(
+    [va_numbers] => Array
+        (
+            [0] => Array
+                (
+                    [va_number] => 95123198419656396462377
+                    [bank] => bca
+                )
+
+        )
+
+    [transaction_time] => 2026-06-30 01:24:32
+    [transaction_status] => pending
+    [transaction_id] => 753949ce-49a3-458b-a267-df50bea5d8c2
+    [status_message] => midtrans payment notification
+    [status_code] => 201
+    [signature_key] => fda816df2782e5a92888a2a40d0c945cb14d5e74e4b9eac271b949a1bb5bf59592bc5f9319ba78b2667d830de76ed6508a5620454fc773021723f4b3ecd41391
+    [payment_type] => bank_transfer
+    [payment_amounts] => Array
+        (
+        )
+
+    [order_id] => 33-1782757467
+    [merchant_id] => M188595123
+    [gross_amount] => 320000.00
+    [fraud_status] => accept
+    [expiry_time] => 2026-07-01 01:24:32
+    [customer_details] => Array
+        (
+            [phone] => 3423434
+            [full_name] => Jody Indra88
+        )
+
+    [currency] => IDR
+)
+
+Array
+(
+    [va_numbers] => Array
+        (
+            [0] => Array
+                (
+                    [va_number] => 95123198419656396462377
+                    [bank] => bca
+                )
+
+        )
+
+    [transaction_time] => 2026-06-30 01:24:32
+    [transaction_status] => settlement
+    [transaction_id] => 753949ce-49a3-458b-a267-df50bea5d8c2
+    [status_message] => midtrans payment notification
+    [status_code] => 200
+    [signature_key] => 34c6d6339f4166ad2f1c31675353c324025dc71fb85cb41d762955e75025aeafd1a28f3fbfa5a5f67299f6ec4d5f7b60143d1d7ddc6923949b6f44b3e05aeeb6
+    [settlement_time] => 2026-06-30 01:24:44
+    [payment_type] => bank_transfer
+    [payment_amounts] => Array
+        (
+        )
+
+    [order_id] => 33-1782757467
+    [merchant_id] => M188595123
+    [gross_amount] => 320000.00
+    [fraud_status] => accept
+    [expiry_time] => 2026-07-01 01:24:32
+    [customer_details] => Array
+        (
+            [phone] => 3423434
+            [full_name] => Jody Indra88
+        )
+
+    [currency] => IDR
+)
+

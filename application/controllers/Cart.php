@@ -260,7 +260,7 @@ class Cart extends CI_Controller {
                 echo "Gagal simpan transaksi!"; die();
             }
 
-            $server_key = '$_ENV[MIDTRANS_SERVER_KEY]'; // Ambil dari .env
+            $server_key = $_ENV['MIDTRANS_SERVER_KEY']; // Ambil dari .env
 
             $transaction_details = array(
                 'order_id' => $transaksi_id . '-' . time(), 
