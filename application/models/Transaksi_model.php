@@ -141,5 +141,10 @@ class Transaksi_model extends CI_Model {
         
         return $this->db->get()->result_array();
     }
+
+    public function get_riwayat_user($user_id) {
+    $this->db->where('user_id', $user_id);
+    return $this->db->get('transaksi')->result_array();
+    }
 }
 ?>
