@@ -52,6 +52,49 @@
     </div>
 </section>
 
+<div class="product-grid">
+    <?php if(!empty($best_seller)): ?>
+        <?php foreach($best_seller as $item): ?>
+            <?php 
+                // Cek harga diskon
+                $harga = (isset($item['harga_diskon']) && $item['harga_diskon'] > 0) ? $item['harga_diskon'] : $item['harga'];
+                $kategori = ($item['tipe_asli'] == 'cabai') ? 'Cabai Segar' : 'Bibit Unggul';
+                $ikon = ($item['tipe_asli'] == 'cabai') ? 'fa-pepper-hot' : 'fa-seedling';
+                
+                // BIKIN LINK DINAMIS KE HALAMAN DETAIL
+                $link_detail = base_url($item['tipe_asli'] . '/detail/' . $item['id']);
+            ?>
+            <div class="product-card">
+                <div class="product-badge">Best Seller 🔥</div>
+                
+                <div class="product-image">
+                    <?php if(!empty($item['gambar'])): ?>
+                        <img src="<?= base_url('assets/dist/img/' . $item['gambar']) ?>" alt="<?= $item['nama_tampil'] ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    <?php else: ?>
+                        <div class="product-image-placeholder"><i class="fas <?= $ikon ?>"></i></div>
+                    <?php endif; ?>
+                </div>
+
+                <div class="product-content">
+                    <span class="product-category"><?= $kategori ?></span>
+                    <h3 class="product-title"><?= $item['nama_tampil'] ?></h3>
+                    
+                    <div class="product-price">
+                        <span class="price-current">Rp <?= number_format($harga, 0, ',', '.') ?></span>
+                    </div>
+                    
+                    <!-- TOMBOL YANG UDAH NYAMBUNG KE DETAIL -->
+                    <a href="<?= $link_detail ?>" class="product-btn" style="text-align: center;">
+                        <i class="fas fa-shopping-cart"></i> Beli Sekarang
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p style="grid-column: span 4; text-align: center; color: var(--gray);">Belum ada data penjualan.</p>
+    <?php endif; ?>
+</div>
+
 <!-- ABOUT SECTION -->
 <section class="about-duaputra">
     <div class="about-grid-kustom">

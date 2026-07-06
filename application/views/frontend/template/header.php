@@ -11,6 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Duaputra - Bibit Unggul, Panen Maksimal</title>
+    <link rel="icon" type="image/png" href="<?= base_url('assets/dist/img/fav.png') ?>">
 
     <!-- Google Fonts (Inter & Poppins) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
