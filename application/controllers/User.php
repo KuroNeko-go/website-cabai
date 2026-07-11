@@ -10,7 +10,9 @@ class User extends CI_Controller {
             redirect('auth/login');
         }
         // Load model user yang udah kita pake di Admin_user kemarin
-        $this->load->model('User_model'); 
+        $this->load->model('User_model');
+        
+        $this->load->model('Transaksi_model');
     }
 
     // Nampilin halaman profil
@@ -99,4 +101,40 @@ class User extends CI_Controller {
         $this->session->set_flashdata('success', 'Profil dan foto berhasil diupdate!');
         redirect('user/profile');
     }
+
+    public function riwayat()
+    {
+        // Ambil ID User yang lagi login
+        $user_id = $this->session->userdata('id_user');
+        
+        // Ambil data transaksi khusus user ini dari Model
+        // (Bikin fungsi get_riwayat_user() di Transaksi_model kalau belum ada)
+        $data['riwayat'] = $this->Transaksi_model->get_riwayat_user($user_id);
+        
+        // Lempar data ke View
+        $this->load->view('frontend/user/riwayat', $data);
+    }
+
+    public function detail_riwayat($kode_transaksi)
+    {
+        $id_user = $this->session->userdata('id_user');
+        
+        // Tarik data induk transaksi
+        $data['transaksi'] = $this->Transaksi_model->get_transaksi_by_kode($kode_transaksi, $id_user);
+        
+        // Keamanan: Kalau transaksinya nggak ada atau bukan punya user ini, tendang balik!
+        if (!$data['transaksi']) {
+            $this->session->set_flashdata('error', 'Pesanan tidak ditemukan!');
+            redirect('user/riwayat');
+        }
+
+        // Tarik data rincian barang berdasarkan ID transaksi
+        $data['detail'] = $this->Transaksi_model->get_detail_transaksi($data['transaksi']['id']);
+        
+        // Lempar ke View
+        $this->load->view('frontend/user/detail_riwayat', $data);
+    }
+
+    
+    
 }

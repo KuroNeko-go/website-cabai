@@ -75,6 +75,8 @@
             
             <?php if ($this->session->userdata('id_user')) : ?>
 
+                <a href="<?= base_url('user/riwayat') ?>"><i class="fas fa-clipboard-list" style="width:25px;"></i> Riwayat Pesanan</a>
+
                 <a href="<?= base_url('auth/logout') ?>" class="btn-login-drawer" style="background-color: #dc3545; color: white;"><i class="fas fa-sign-out-alt"></i> Logout</a>
             <?php else : ?>
                 <a href="<?= base_url('auth/login') ?>" class="btn-login-drawer"><i class="fas fa-sign-in-alt"></i> Login Anggota</a>

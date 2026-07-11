@@ -505,5 +505,75 @@ class Cart extends CI_Controller {
             echo "Bad Request";
         }
     }
+
+    // --- FUNGSI BUAT MELANJUTKAN PEMBAYARAN TRX LAMA ---
+    public function lanjut_bayar($kode_transaksi)
+    {
+        if (!$this->session->userdata('id_user')) {
+            redirect('auth/login');
+        }
+
+        $id_user = $this->session->userdata('id_user');
+        
+        // 1. Cari transaksi lama di database
+        $this->db->where('kode_transaksi', $kode_transaksi);
+        $this->db->where('id_user', $id_user); 
+        $transaksi = $this->db->get('transaksi')->row_array();
+
+        // 2. Keamanan: Kalau datanya gak ada atau statusnya udah dibayar, tolak!
+        if (!$transaksi || $transaksi['status'] != 'pending') {
+            $this->session->set_flashdata('error', 'Pesanan tidak valid atau sudah dibayar.');
+            redirect('user/riwayat');
+            return;
+        }
+
+        // 3. Bangkitkan ulang token Midtrans
+        $server_key = $_ENV['MIDTRANS_SERVER_KEY'];
+        $total = $transaksi['grand_total'];
+
+        $transaction_details = array(
+            // Pake format order_id yang sama kayak di fungsi checkout lu
+            'order_id' => $transaksi['id'] . '-' . time(), 
+            'gross_amount' => (int)$total,
+        );
+
+        $customer_details = array(
+            'first_name' => $transaksi['nama_pelanggan'],
+            'phone'      => $transaksi['telepon'],
+            'shipping_address' => $transaksi['alamat']
+        );
+
+        $midtrans_params = array(
+            'transaction_details' => $transaction_details,
+            'customer_details'    => $customer_details
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://app.sandbox.midtrans.com/snap/v1/transactions");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($midtrans_params));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'Authorization: Basic ' . base64_encode($server_key . ':')
+        ));
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $snap_response = json_decode($response);
+        
+        if (!isset($snap_response->token)) {
+            $this->session->set_flashdata('error', 'Gagal menghubungi server Midtrans.');
+            redirect('user/riwayat');
+            return;
+        }
+
+        // 4. Set session token baru dan lempar ke halaman bayar
+        $this->session->set_userdata('snap_token', $snap_response->token);
+        $this->session->set_userdata('order_total', $total);
+        
+        redirect('cart/pay');
+    }
 }
 ?>

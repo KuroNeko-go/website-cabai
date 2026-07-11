@@ -1,2 +1,1 @@
-ALTER TABLE cabais 
-ADD stok INT(11) NOT NULL DEFAULT 0 AFTER harga;
+UPDATE transaksi SET id_user = 18 WHERE id_user IS NULL;

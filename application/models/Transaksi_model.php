@@ -142,9 +142,46 @@ class Transaksi_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function get_riwayat_user($user_id) {
-    $this->db->where('user_id', $user_id);
-    return $this->db->get('transaksi')->result_array();
+    public function riwayat()
+{
+    // 1. TAMBAHIN BARIS INI BIAR NGGAK ERROR (Load model dulu)
+    $this->load->model('Transaksi_model');
+
+    // 2. Baru deh lanjutin kodingan lu yang tadi
+    $user_id = $this->session->userdata('id_user');
+    
+    // (Pastiin juga fungsi get_riwayat_user ini udah lu bikin di Transaksi_model.php ya)
+    $data['riwayat'] = $this->Transaksi_model->get_riwayat_user($user_id);
+    
+    // 3. Lempar ke View
+    $this->load->view('frontend/user/riwayat', $data);
+    }
+
+    public function get_riwayat_user($id_user) 
+    {
+        // Cari data di tabel transaksi yang 'id_user'-nya sama dengan punya user yang lagi login
+        $this->db->where('id_user', $id_user);
+        
+        // Urutin dari yang paling baru belanjanya (paling atas)
+        $this->db->order_by('created_at', 'DESC');
+        
+        // Ambil datanya
+        return $this->db->get('transaksi')->result_array();
+    }
+
+    
+    public function get_transaksi_by_kode($kode_transaksi, $id_user) 
+    {
+        $this->db->where('kode_transaksi', $kode_transaksi);
+        $this->db->where('id_user', $id_user);
+        return $this->db->get('transaksi')->row_array();
+    }
+
+    // Narik daftar barang apa aja yang dibeli di transaksi itu
+    public function get_detail_transaksi($transaksi_id) 
+    {
+        $this->db->where('transaksi_id', $transaksi_id);
+        return $this->db->get('transaksi_detail')->result_array();
     }
 }
 ?>
