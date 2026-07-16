@@ -27,34 +27,8 @@
     <script src="<?= base_url('assets/dashmin/lib/tempusdominus/js/moment-timezone.min.js') ?>"></script>
     <script src="<?= base_url('assets/dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
 
-
-    <script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.all.min.js') ?>"></script>
-
-    <script>
-    // LOGIKA TOMBOL LOGOUT SWEETALERT (Bawaan Lu)
-    document.getElementById('tombolLogout').addEventListener('click', function(e) {
-        e.preventDefault(); // Ngerem biar ga langsung pindah halaman
-        
-        let linkLogout = this.getAttribute('href');
-
-        Swal.fire({
-            title: 'Yakin ingin logout?',
-            text: "Kamu akan keluar dari akun admin ini.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',     // Merah buat tombol logout
-            cancelButtonColor: '#2d7a24',   // Ijo buat batal
-            confirmButtonText: 'Yakin',
-            cancelButtonText: 'Batal',
-            background: '#ffffff',
-            color: '#1a3e15'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = linkLogout; 
-            }
-        });
-    });
-    </script>
+    <!-- Template Javascript -->
     <script src="<?= base_url('assets/dashmin/js/main.js') ?>"></script>
 </body>
+
 </html>
